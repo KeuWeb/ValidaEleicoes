@@ -3062,6 +3062,58 @@ $(document).on('keyup', '#cep', function () {
 
 /***/ }),
 
+/***/ "./resources/js/function.js":
+/*!**********************************!*\
+  !*** ./resources/js/function.js ***!
+  \**********************************/
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
+
+/* module decorator */ module = __webpack_require__.nmd(module);
+// Questionamento quanto a exclusão do registro
+$(document).on('click', '.delete', function () {
+  id = $(this).attr('data-id');
+  module = $(this).attr('data-module');
+  $('#idDelete').val(id);
+  msgPopup('delete', 'Tem certeza que deseja excluir?');
+  return false;
+});
+// Efetivação da exclusão do registro
+$('body').on('submit', '#form-delete', function (event) {
+  event.preventDefault();
+  $.ajax({
+    url: $('#route-delete').val(),
+    type: "put",
+    data: $(this).serialize(),
+    dataType: 'json',
+    success: function success(response) {
+      if (response.status == 'success') {
+        $('#line-' + $('#idDelete').val()).css({
+          'display': "none"
+        });
+      }
+      msgPopup(response.status, response.message);
+      return false;
+    },
+    error: function error(response) {
+      msgPopup(response.status, response.message);
+      return false;
+    },
+    statusCode: {
+      500: function _() {
+        msgPopup('error', 'Ops! Erro ao efetuar solicitação, tente mais tarde.');
+      }
+    }
+  });
+});
+// Buscador de regitros
+$(document).on('click', '#btn-search', function () {
+  var search = $('#src').val();
+  var module = $('#src').attr('data-module');
+  window.location = window.location.href + '?module=' + module + '&src=' + search;
+});
+
+/***/ }),
+
 /***/ "./resources/js/global.js":
 /*!********************************!*\
   !*** ./resources/js/global.js ***!
@@ -24732,12 +24784,15 @@ module.exports = function (list, options) {
 /******/ 		// Create a new module (and put it into the cache)
 /******/ 		var module = __webpack_module_cache__[moduleId] = {
 /******/ 			id: moduleId,
-/******/ 			// no module.loaded needed
+/******/ 			loaded: false,
 /******/ 			exports: {}
 /******/ 		};
 /******/ 	
 /******/ 		// Execute the module function
 /******/ 		__webpack_modules__[moduleId].call(module.exports, module, module.exports, __webpack_require__);
+/******/ 	
+/******/ 		// Flag the module as loaded
+/******/ 		module.loaded = true;
 /******/ 	
 /******/ 		// Return the exports of the module
 /******/ 		return module.exports;
@@ -24796,6 +24851,15 @@ module.exports = function (list, options) {
 /******/ 		};
 /******/ 	})();
 /******/ 	
+/******/ 	/* webpack/runtime/node module decorator */
+/******/ 	(() => {
+/******/ 		__webpack_require__.nmd = (module) => {
+/******/ 			module.paths = [];
+/******/ 			if (!module.children) module.children = [];
+/******/ 			return module;
+/******/ 		};
+/******/ 	})();
+/******/ 	
 /******/ 	/* webpack/runtime/nonce */
 /******/ 	(() => {
 /******/ 		__webpack_require__.nc = undefined;
@@ -24811,6 +24875,7 @@ module.exports = function (list, options) {
 /******/ 	__webpack_require__("./resources/js/jquery.form.min.js");
 /******/ 	__webpack_require__("./resources/js/mask.js");
 /******/ 	__webpack_require__("./resources/js/validate.js");
+/******/ 	__webpack_require__("./resources/js/function.js");
 /******/ 	__webpack_require__("./resources/js/popup.manager.js");
 /******/ 	var __webpack_exports__ = __webpack_require__("./resources/js/cep.js");
 /******/ 	

@@ -259,46 +259,6 @@ $('body').on('submit', '#user-adm', function (event) {
     }
   });
 });
-// Buscador de regitros
-$(document).on('click', '#btn-search-user', function () {
-  var search = $('#src').val();
-  window.location = window.location.href + '?src=' + search;
-});
-// Questionamento quanto a exclusão do registro
-$(document).on('click', '.del-user', function () {
-  id = $(this).attr('data-id');
-  $('#iduser').val(id);
-  msgPopup('delete', 'Tem certeza que deseja excluir?');
-  return false;
-});
-// Efetivação da exclusão do registro
-$('body').on('submit', '#formuser-delete', function (event) {
-  event.preventDefault();
-  $.ajax({
-    url: $('#route-user').val(),
-    type: "put",
-    data: $(this).serialize(),
-    dataType: 'json',
-    success: function success(response) {
-      if (response.status == 'success') {
-        $('#line-' + $('#iduser').val()).css({
-          'display': "none"
-        });
-      }
-      msgPopup(response.status, response.message);
-      return false;
-    },
-    error: function error(response) {
-      msgPopup(response.status, response.message);
-      return false;
-    },
-    statusCode: {
-      500: function _() {
-        msgPopup('error', 'Ops! Erro ao efetuar solicitação, tente mais tarde.');
-      }
-    }
-  });
-});
 })();
 
 // This entry need to be wrapped in an IIFE because it need to be isolated against other entry modules.

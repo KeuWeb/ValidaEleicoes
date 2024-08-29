@@ -11,11 +11,11 @@
             <div id="msg-popup" class="animated">
                 <i></i>
                 <span></span>
-                <form id="formcategory-delete" name="formcategory-delete" class="btns-delete d-none" data-type="category">
+                <form id="form-delete" name="form-delete" class="btns-delete d-none" data-type="category">
                     @csrf
                     @method('PUT')
-                    <input type="hidden" id="route-category" name="route-category" value="{{ route('adm.del.category.do') }}">
-                    <input type="hidden" id="idcategory" name="idcategory">
+                    <input type="hidden" id="route-delete" name="route-delete" value="{{ route('adm.del.category.do') }}">
+                    <input type="hidden" id="idDelete" name="idDelete">
                     <button type="button" class="n-category btn btn-success btn-sm">Cancelar</button>
                     <button type="submit" class="y-category btn btn-danger btn-sm">Excluir</button>
                 </form>
@@ -27,14 +27,12 @@
             <p class="m-3 p-3 bg-success text-white"><a href="cpanel">CPanel</a> <i class="bi bi-caret-right-fill text-white"></i> Editar/Excluir Categorias</p>
             <div class="m-3 p-4 row bg-white">
      
-                <form id="category-search" name="category-search" autocomplete="off" method="PUT" style="padding-left: 0;">
-                    @csrf
-                    @method('PUT')
+                <form id="form-search" name="form-search" autocomplete="off" method="PUT" style="padding-left: 0;">
     
                     <div class="input-group mb-3">
-                        <input type="text" class="form-control" placeholder="Digite o nome da categoria a ser buscada">
+                        <input type="text" id="src" name="src" class="form-control" placeholder="Digite o nome da categoria a ser buscada">
                         <div class="input-group-append">
-                        <button class="btn btn-success text-white" type="button"><i class="text-white bi bi-search"> buscar</i></button>
+                        <button id="btn-search" name="btn-search" class="btn btn-success text-white" type="button"><i class="text-white bi bi-search"> buscar</i></button>
                         </div>
                     </div>
     
@@ -51,7 +49,7 @@
                         <div class="col-9 fw-bolder pt-1">{{ @$category->title }}</div>
                         <div class="container-actions col-3 fw-bolder text-end">
                             <a type="button" href="{{ route('adm.edit.category',@$category->id) }}" target="_self" class="edit-category btn btn-primary btn-sm text-white"><i class="bi bi-pencil-fill pt-1 me-1 text-white"></i>Editar</a>
-                            <button type="submit" data-id={{ @$category->id }} data-type="category" class="del-category btn btn-danger btn-sm"><i class="bi bi-trash-fill pt-1 me-1 text-white"></i>Excluir</button>
+                            <button type="submit" data-id={{ @$category->id }} data-type="category" class="delete btn btn-danger btn-sm"><i class="bi bi-trash-fill pt-1 me-1 text-white"></i>Excluir</button>
                         </div>
                     </li>
     

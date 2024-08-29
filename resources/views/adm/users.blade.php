@@ -11,11 +11,11 @@
             <div id="msg-popup" class="animated">
                 <i></i>
                 <span></span>
-                <form id="formuser-delete" name="formuser-delete" class="btns-delete d-none" data-type="user">
+                <form id="form-delete" name="form-delete" class="btns-delete d-none">
                     @csrf
                     @method('PUT')
-                    <input type="hidden" id="route-user" name="route-user" value="{{ route('adm.del.user.do') }}">
-                    <input type="hidden" id="iduser" name="iduser">
+                    <input type="hidden" id="route-delete" name="route-delete" value="{{ route('adm.del.user.do') }}">
+                    <input type="hidden" id="idDelete" name="idDelete">
                     <button type="button" class="n-user btn btn-success btn-sm">Cancelar</button>
                     <button type="submit" class="y-user btn btn-danger btn-sm">Excluir</button>
                 </form>
@@ -30,9 +30,9 @@
                 <form id="form-search" name="form-search" autocomplete="off" method="GET" style="padding-left: 0;">
                     
                     <div class="input-group mb-3">
-                        <input type="text" id="src" name="src" class="form-control" placeholder="Digite o nome do usuário a ser buscado" aria-label="Recipient's username" aria-describedby="basic-addon2">
+                        <input type="text" id="src" name="src" class="form-control" data-module="user" placeholder="Digite o nome do usuário a ser buscado">
                         <div class="input-group-append">
-                        <button id="btn-search-user" name="btn-search-user" class="btn btn-success text-white" type="button"><i class="text-white bi bi-search"> buscar</i></button>
+                        <button id="btn-search" name="btn-search" class="btn btn-success text-white" type="button"><i class="text-white bi bi-search"> buscar</i></button>
                         </div>
                     </div>
     
@@ -70,7 +70,7 @@
                                 <div class="col-2 fw-bolder pt-1">@if($user->level == 1) Master @else Básico @endif </div>
                                 <div class="container-actions col-3 fw-bolder text-end">
                                     <a type="button" href="{{ route('adm.edit.user',@$user->id) }}" target="_self" class="edit-user btn btn-primary btn-sm text-white"><i class="bi bi-pencil-fill pt-1 me-1 text-white"></i>Editar</a>
-                                    <button type="submit" data-id={{ @$user->id }} data-type="user" class="del-user btn btn-danger btn-sm"><i class="bi bi-trash-fill pt-1 me-1 text-white"></i>Excluir</button>
+                                    <button type="submit" data-id={{ @$user->id }} data-module="user" class="delete btn btn-danger btn-sm"><i class="bi bi-trash-fill pt-1 me-1 text-white"></i>Excluir</button>
                                 </div>
                             </li>
     

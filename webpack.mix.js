@@ -24,6 +24,7 @@ mix.styles([
         'resources/js/jquery.form.min.js',
         'resources/js/mask.js',
         'resources/js/validate.js',
+        'resources/js/function.js',
         'resources/js/popup.manager.js',
         'resources/js/cep.js'
     ],'public/inc/file/js/global.js')

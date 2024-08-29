@@ -205,7 +205,7 @@ class AdmUsersController extends Controller
             $user = new AdmUsers();
 
             $user->where(
-                'id',$request->iduser
+                'id',$request->idDelete
             )->update([
                 'status' => 2
             ]);
