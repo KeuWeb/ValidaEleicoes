@@ -1,0 +1,115 @@
+@charset "UTF-8";
+
+/*!
+ * ANIMATE.CSS
+ * Version - 3.5.2
+ * Licensed under the MIT license - http://opensource.org/licenses/MIT
+ * Copyright (c) 2017 Daniel Eden
+ */
+
+.animated {
+  animation-duration: 1s;
+  animation-fill-mode: both;
+}
+
+
+@keyframes fadeInDownBig {
+  from {
+    opacity: 0;
+    transform: translate3d(0, -2000px, 0);
+  }
+
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+.fadeInDownBig {
+  animation-name: fadeInDownBig;
+}
+
+@keyframes fadeOutUpBig {
+  from {
+    opacity: 1;
+  }
+
+  to {
+    opacity: 0;
+    transform: translate3d(0, -2000px, 0);
+  }
+}
+
+.fadeOutUpBig {
+  animation-name: fadeOutUpBig;
+}
+
+/*!
+ * POPUP MANAGER
+ * Version - 0.2
+ * Created by Clayton Santos
+ */
+ #container-system{
+  transition: 0.3s;
+ }
+
+#msg-popup{
+  max-width: 40%;
+  margin: 0 auto;
+  display: none;
+  border-radius: 5px;
+  background-color: #FFFFFF;
+  cursor: pointer;
+  position: fixed;
+  top: 10px;
+  z-index: 999;
+  box-shadow: 0 0 6px 0 #AAA;
+}
+
+#msg-popup div{
+  --duration: 10
+}
+
+#msg-popup i{
+  display: table;
+  width: 100%;
+  padding-top: 30px;
+  font-size: 2.5em;
+  text-align: center;
+}
+
+#msg-popup span{
+  text-align: center;
+  display: table-cell;
+  width: 89%;
+  padding: 20px 15px;
+  border-radius: 5px;
+  font-size: 1em;
+}
+
+.time-bar{
+  width: 100%;
+  display: block !important;
+  overflow: hidden;
+  border-bottom-left-radius: 5px;
+  border-bottom-right-radius: 5px;
+  margin: 0 auto;
+}
+
+.time-bar div{
+  height: 3px;
+  display: block !important;
+  background-color: #CCC;
+  border-bottom-left-radius: 5px;
+  border-bottom-right-radius: 5px;
+  animation: roundtime calc(var(--duration) * 1s) steps(var(--duration)) forwards;
+  transform-origin: left center;
+}
+.bar[data-style="smooth"] div{
+  animation: roundtime calc(var(--duration) * 1s) linear forwards;
+}
+@keyframes roundtime{
+  to{
+    transform: scaleX(0);
+  }
+}
