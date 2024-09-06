@@ -13,6 +13,7 @@ use App\Http\Controllers\AdmMailingController;
 use App\Http\Controllers\AdmUploadsController;
 use App\Http\Controllers\AdmUsersController;
 use App\Http\Controllers\AdmCategoryController;
+use App\Http\Controllers\AdmLocationController;
 use Illuminate\Support\Facades\Session;
 
 /*
@@ -75,4 +76,7 @@ Route::middleware(['web'])->group(function(){
    Route::put('/adm/category/do',[AdmCategoryController::class,'AdmCategoryDo'])->name('adm.category.do');
    Route::put('adm/category/delete/do',[AdmCategoryController::class, 'AdmDelCategoryDo'])->name('adm.del.category.do');
 
+   // Localidades
+   Route::get('/adm/location',[AdmLocationController::class,'AdmLocation'])->name('adm.location');
+   Route::get('/adm/locations',[AdmLocationController::class,'AdmLocations'])->name('adm.locations');
 });

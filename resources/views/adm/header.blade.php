@@ -47,8 +47,8 @@
                   Localidades
                 </a>
                 <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                  <li><a class="dropdown-item" href="#">Cadastrar Localidade</a></li>
-                  <li><a class="dropdown-item" href="#">Editar/Excluir Localidade</a></li>
+                  <li><a class="dropdown-item" href="{{ route('adm.location') }}">Cadastrar Localidade</a></li>
+                  <li><a class="dropdown-item" href="{{ route('adm.locations') }}">Editar/Excluir Localidade</a></li>
                 </ul>
               </li> 
               <li class="nav-item dropdown">

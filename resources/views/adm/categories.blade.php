@@ -45,7 +45,7 @@
     
                     @foreach($categories as $category)
     
-                    <li class="list-group-item">
+                    <li id="line-<?=$category->id;?>" class="list-group-item">
                         <div class="col-9 fw-bolder pt-1">{{ @$category->title }}</div>
                         <div class="container-actions col-3 fw-bolder text-end">
                             <a type="button" href="{{ route('adm.edit.category',@$category->id) }}" target="_self" class="edit-category btn btn-primary btn-sm text-white"><i class="bi bi-pencil-fill pt-1 me-1 text-white"></i>Editar</a>

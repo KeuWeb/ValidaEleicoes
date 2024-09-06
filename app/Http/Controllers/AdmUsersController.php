@@ -11,7 +11,8 @@ use App\Models\AdmUsers;
 class AdmUsersController extends Controller
 {
     // Ação para acessar a pagina do formulário para cadastro
-    public function AdmUser(){
+    public function AdmUser()
+    {
         return view('adm/user');
     }
     // Ação para efetuar a listagem dos cadastros feitos e busca, caso houver 

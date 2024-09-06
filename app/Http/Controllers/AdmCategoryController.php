@@ -67,5 +67,25 @@ class AdmCategoryController extends Controller
 
             exit(); 
         }
-    }    
+    }   
+        // Ação para excluir o registro no BD
+        public function AdmDelCategoryDo(Request $request)
+        {
+            if (!empty($request)) {
+                $category = new AdmCategories();
+    
+                $category->where(
+                    'id',$request->idDelete
+                )->update([
+                    'status' => 2
+                ]);
+    
+                return response()->json([
+                    'status' => "success",
+                    'message' => "Registro excluido com sucesso."
+                ]);
+     
+                exit();
+            }
+        } 
 }

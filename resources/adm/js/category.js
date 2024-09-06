@@ -57,37 +57,3 @@ $(document).on('click', '.del-user', function() {
 
     return false;
 });
-// Efetivação da exclusão do registro
-$('body').on('submit', '#formuser-delete', function(event) {
-    event.preventDefault();
-
-    $.ajax({
-        url: $('#route-user').val(),
-        type: "put",
-        data: $(this).serialize(),
-        dataType: 'json',
-        success: function(response) {
-
-            if (response.status == 'success') {
-                $('#line-' + $('#iduser').val()).css({
-                    'display':"none"
-                });
-            }
-            
-            msgPopup(response.status, response.message);
-
-            return false;
-        },
-        error: function(response) {
-
-            msgPopup(response.status, response.message);
-
-            return false;
-        },
-        statusCode: {
-            500: function() {
-                msgPopup('error', 'Ops! Erro ao efetuar solicitação, tente mais tarde.');
-            }
-        }
-    });
-});
