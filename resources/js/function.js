@@ -51,3 +51,19 @@ $(document).on('click', '#btn-search', function() {
 
     window.location = window.location.href + '?module=' + module + '&src=' + search;
 });
+
+$(document).on('change', '.category', function() {
+
+    var location = $('option:selected', this).text();
+    var id_location = $(this).val();
+
+    var html_location = "<li class=location-" + id_location + "><span>x</span><p>" + location + "</p></li>";
+
+    $('.txt-locations').css({
+        'display': 'none'
+    });
+
+    $('.opt-' + id_location).attr('disabled', 'disabled');
+
+    $('.list-locations').append(html_location);
+})

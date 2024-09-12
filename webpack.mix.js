@@ -15,9 +15,12 @@ mix.styles([
     'resources/css/global.css',
     'node_modules/bootstrap/dist/css/bootstrap.css',
     'node_modules/bootstrap-icons/font/bootstrap-icons.css',
+    'node_modules/select2-bootstrap-5-theme/dist/select2.min.css',
+    'node_modules/select2-bootstrap-5-theme/dist/select2-bootstrap-5-theme.min.css',
+    'node_modules/select2-bootstrap-5-theme/dist/select2-bootstrap-5-theme.rtl.min.css',
     'resources/css/popup.manager.css'
     ],'public/inc/file/css/global.css')
-
+    
     .js([
         'resources/js/global.js',
         'resources/js/jquery-ui.js',
@@ -42,7 +45,7 @@ mix.styles([
         'resources/adm/js/company.js',
         'resources/adm/js/uploads.js'
     ],'public/inc/file/js/adm.js')
-
+    
     .copy([
         'node_modules/bootstrap-icons/font/fonts/bootstrap-icons.woff'
     ],'public/inc/file/css/fonts/bootstrap-icons.woff')
@@ -57,4 +60,8 @@ mix.styles([
 
     .copy([
         'node_modules/jquery-mask-plugin/dist/jquery.mask.js'
-    ],'public/inc/file/js/jquery.mask.js');
+    ],'public/inc/file/js/jquery.mask.js')
+
+    .copy([
+        'node_modules/select2-bootstrap-5-theme/dist/select2.min.js'
+    ],'public/inc/file/js/select2.min.js');

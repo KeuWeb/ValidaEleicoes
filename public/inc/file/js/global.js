@@ -3111,6 +3111,16 @@ $(document).on('click', '#btn-search', function () {
   var module = $('#src').attr('data-module');
   window.location = window.location.href + '?module=' + module + '&src=' + search;
 });
+$(document).on('change', '.category', function () {
+  var location = $('option:selected', this).text();
+  var id_location = $(this).val();
+  var html_location = "<li class=location-" + id_location + "><span>x</span><p>" + location + "</p></li>";
+  $('.txt-locations').css({
+    'display': 'none'
+  });
+  $('.opt-' + id_location).attr('disabled', 'disabled');
+  $('.list-locations').append(html_location);
+});
 
 /***/ }),
 
@@ -3124,20 +3134,24 @@ $(document).on('click', '#btn-search', function () {
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var bootstrap__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! bootstrap */ "./node_modules/bootstrap/dist/js/bootstrap.esm.js");
 /* harmony import */ var bootstrap_dist_css_bootstrap_min_css__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! bootstrap/dist/css/bootstrap.min.css */ "./node_modules/bootstrap/dist/css/bootstrap.min.css");
-/* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! jquery */ "./node_modules/jquery/dist/jquery.js");
-/* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(jquery__WEBPACK_IMPORTED_MODULE_2__);
-/* harmony import */ var popper_js_dist_umd_popper_js__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! popper.js/dist/umd/popper.js */ "./node_modules/popper.js/dist/umd/popper.js");
-/* harmony import */ var popper_js_dist_umd_popper_js__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(popper_js_dist_umd_popper_js__WEBPACK_IMPORTED_MODULE_4__);
-/* harmony import */ var jquery_mask_plugin__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! jquery-mask-plugin */ "./node_modules/jquery-mask-plugin/dist/jquery.mask.js");
-/* harmony import */ var jquery_mask_plugin__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(jquery_mask_plugin__WEBPACK_IMPORTED_MODULE_3__);
+/* harmony import */ var bootstrap_multiselect_dist_css_bootstrap_multiselect_min_css__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! bootstrap-multiselect/dist/css/bootstrap-multiselect.min.css */ "../../node_modules/bootstrap-multiselect/dist/css/bootstrap-multiselect.min.css");
+/* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! jquery */ "./node_modules/jquery/dist/jquery.js");
+/* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(jquery__WEBPACK_IMPORTED_MODULE_3__);
+/* harmony import */ var popper_js_dist_umd_popper_js__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! popper.js/dist/umd/popper.js */ "./node_modules/popper.js/dist/umd/popper.js");
+/* harmony import */ var popper_js_dist_umd_popper_js__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(popper_js_dist_umd_popper_js__WEBPACK_IMPORTED_MODULE_5__);
+/* harmony import */ var jquery_mask_plugin__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! jquery-mask-plugin */ "./node_modules/jquery-mask-plugin/dist/jquery.mask.js");
+/* harmony import */ var jquery_mask_plugin__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(jquery_mask_plugin__WEBPACK_IMPORTED_MODULE_4__);
 
 
 
 
 
-window.$ = (jquery__WEBPACK_IMPORTED_MODULE_2___default());
-window.jQuery = (jquery__WEBPACK_IMPORTED_MODULE_2___default());
-window.Popper = (popper_js_dist_umd_popper_js__WEBPACK_IMPORTED_MODULE_4___default());
+
+// import 'bootstrap-multiselect';
+
+window.$ = (jquery__WEBPACK_IMPORTED_MODULE_3___default());
+window.jQuery = (jquery__WEBPACK_IMPORTED_MODULE_3___default());
+window.Popper = (popper_js_dist_umd_popper_js__WEBPACK_IMPORTED_MODULE_5___default());
 
 /***/ }),
 
@@ -10383,6 +10397,30 @@ defineJQueryPlugin(Toast);
 
 
 //# sourceMappingURL=bootstrap.esm.js.map
+
+
+/***/ }),
+
+/***/ "./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[5].oneOf[1].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[5].oneOf[1].use[2]!../../node_modules/bootstrap-multiselect/dist/css/bootstrap-multiselect.min.css":
+/*!*************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[5].oneOf[1].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[5].oneOf[1].use[2]!../../node_modules/bootstrap-multiselect/dist/css/bootstrap-multiselect.min.css ***!
+  \*************************************************************************************************************************************************************************************************************************************************/
+/***/ ((module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _projects_eleicao_node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../../../projects/eleicao/node_modules/css-loader/dist/runtime/api.js */ "./node_modules/css-loader/dist/runtime/api.js");
+/* harmony import */ var _projects_eleicao_node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_projects_eleicao_node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0__);
+// Imports
+
+var ___CSS_LOADER_EXPORT___ = _projects_eleicao_node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
+// Module
+___CSS_LOADER_EXPORT___.push([module.id, "/**\r\n * Bootstrap Multiselect (http://davidstutz.de/bootstrap-multiselect/)\r\n *\r\n * Apache License, Version 2.0:\r\n * Copyright (c) 2012 - 2021 David Stutz\r\n *\r\n * Licensed under the Apache License, Version 2.0 (the \"License\"); you may not\r\n * use this file except in compliance with the License. You may obtain a\r\n * copy of the License at http://www.apache.org/licenses/LICENSE-2.0\r\n *\r\n * Unless required by applicable law or agreed to in writing, software\r\n * distributed under the License is distributed on an \"AS IS\" BASIS, WITHOUT\r\n * WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the\r\n * License for the specific language governing permissions and limitations\r\n * under the License.\r\n *\r\n * BSD 3-Clause License:\r\n * Copyright (c) 2012 - 2021 David Stutz\r\n * All rights reserved.\r\n *\r\n * Redistribution and use in source and binary forms, with or without\r\n * modification, are permitted provided that the following conditions are met:\r\n *    - Redistributions of source code must retain the above copyright notice,\r\n *      this list of conditions and the following disclaimer.\r\n *    - Redistributions in binary form must reproduce the above copyright notice,\r\n *      this list of conditions and the following disclaimer in the documentation\r\n *      and/or other materials provided with the distribution.\r\n *    - Neither the name of David Stutz nor the names of its contributors may be\r\n *      used to endorse or promote products derived from this software without\r\n *      specific prior written permission.\r\n *\r\n * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS \"AS IS\"\r\n * AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO,\r\n * THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR\r\n * PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR\r\n * CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL,\r\n * EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO,\r\n * PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS;\r\n * OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY,\r\n * WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR\r\n * OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF\r\n * ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.\r\n */\r\nspan.multiselect-native-select{position:relative}span.multiselect-native-select select{border:0!important;clip:rect(0 0 0 0)!important;height:1px!important;margin:-1px -1px -1px -3px!important;overflow:hidden!important;padding:0!important;position:absolute!important;width:1px!important;left:50%;top:30px}.multiselect.dropdown-toggle:after{display:none}.multiselect{overflow:hidden;text-overflow:ellipsis}.multiselect-container{position:absolute;list-style-type:none;margin:0;padding:0}.multiselect-container .multiselect-reset .input-group{width:93%}.multiselect-container .multiselect-filter>.fa-search{z-index:1;padding-left:.75rem}.multiselect-container .multiselect-filter>input.multiselect-search{border:none;border-bottom:1px solid #d3d3d3;padding-left:2rem;margin-left:-1.625rem;border-bottom-right-radius:0;border-bottom-left-radius:0}.multiselect-container .multiselect-filter>input.multiselect-search:focus{border-bottom-right-radius:.25rem;border-bottom-left-radius:.25rem}.multiselect-container .multiselect-filter>.multiselect-moz-clear-filter{margin-left:-1.5rem;display:none}.multiselect-container .multiselect-option.multiselect-group-option-indented{padding-left:1.75rem}.multiselect-container .multiselect-all,.multiselect-container .multiselect-group,.multiselect-container .multiselect-option{padding:.25rem .25rem .25rem .75rem}.multiselect-container .multiselect-all.dropdown-item,.multiselect-container .multiselect-all.dropdown-toggle,.multiselect-container .multiselect-group.dropdown-item,.multiselect-container .multiselect-group.dropdown-toggle,.multiselect-container .multiselect-option.dropdown-item,.multiselect-container .multiselect-option.dropdown-toggle{cursor:pointer}.multiselect-container .multiselect-all .form-check-label,.multiselect-container .multiselect-group .form-check-label,.multiselect-container .multiselect-option .form-check-label{cursor:pointer}.multiselect-container .multiselect-all.active:not(.multiselect-active-item-fallback),.multiselect-container .multiselect-all:not(.multiselect-active-item-fallback):active,.multiselect-container .multiselect-group.active:not(.multiselect-active-item-fallback),.multiselect-container .multiselect-group:not(.multiselect-active-item-fallback):active,.multiselect-container .multiselect-option.active:not(.multiselect-active-item-fallback),.multiselect-container .multiselect-option:not(.multiselect-active-item-fallback):active{background-color:#d3d3d3;color:#000}.multiselect-container .multiselect-all .form-check,.multiselect-container .multiselect-group .form-check,.multiselect-container .multiselect-option .form-check{padding:0 5px 0 20px}.multiselect-container .multiselect-all:focus,.multiselect-container .multiselect-group:focus,.multiselect-container .multiselect-option:focus{outline:0}.form-inline .multiselect-container span.form-check{padding:3px 20px 3px 40px}.input-group.input-group-sm>.multiselect-native-select .multiselect{padding:.25rem .5rem;font-size:.875rem;line-height:1.5;padding-right:1.75rem;height:calc(1.5em + .5rem + 2px)}.input-group>.multiselect-native-select{flex:1 1 auto;width:1%}.input-group>.multiselect-native-select>div.btn-group{width:100%}.input-group>.multiselect-native-select:not(:first-child) .multiselect{border-top-left-radius:0;border-bottom-left-radius:0}.input-group>.multiselect-native-select:not(:last-child) .multiselect{border-top-right-radius:0;border-bottom-right-radius:0}", ""]);
+// Exports
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
 
 /***/ }),
@@ -24457,6 +24495,36 @@ return Popper;
 })));
 //# sourceMappingURL=popper.js.map
 
+
+/***/ }),
+
+/***/ "../../node_modules/bootstrap-multiselect/dist/css/bootstrap-multiselect.min.css":
+/*!***************************************************************************************!*\
+  !*** ../../node_modules/bootstrap-multiselect/dist/css/bootstrap-multiselect.min.css ***!
+  \***************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _projects_eleicao_node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! !../../../../projects/eleicao/node_modules/style-loader/dist/runtime/injectStylesIntoStyleTag.js */ "./node_modules/style-loader/dist/runtime/injectStylesIntoStyleTag.js");
+/* harmony import */ var _projects_eleicao_node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_projects_eleicao_node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _projects_eleicao_node_modules_css_loader_dist_cjs_js_ruleSet_1_rules_5_oneOf_1_use_1_projects_eleicao_node_modules_postcss_loader_dist_cjs_js_ruleSet_1_rules_5_oneOf_1_use_2_bootstrap_multiselect_min_css__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! !!../../../../projects/eleicao/node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[5].oneOf[1].use[1]!../../../../projects/eleicao/node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[5].oneOf[1].use[2]!./bootstrap-multiselect.min.css */ "./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[5].oneOf[1].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[5].oneOf[1].use[2]!../../node_modules/bootstrap-multiselect/dist/css/bootstrap-multiselect.min.css");
+
+            
+
+var options = {};
+
+options.insert = "head";
+options.singleton = false;
+
+var update = _projects_eleicao_node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0___default()(_projects_eleicao_node_modules_css_loader_dist_cjs_js_ruleSet_1_rules_5_oneOf_1_use_1_projects_eleicao_node_modules_postcss_loader_dist_cjs_js_ruleSet_1_rules_5_oneOf_1_use_2_bootstrap_multiselect_min_css__WEBPACK_IMPORTED_MODULE_1__["default"], options);
+
+
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_projects_eleicao_node_modules_css_loader_dist_cjs_js_ruleSet_1_rules_5_oneOf_1_use_1_projects_eleicao_node_modules_postcss_loader_dist_cjs_js_ruleSet_1_rules_5_oneOf_1_use_2_bootstrap_multiselect_min_css__WEBPACK_IMPORTED_MODULE_1__["default"].locals || {});
 
 /***/ }),
 

@@ -7,6 +7,10 @@
     color: #555;
 }
 
+option:disabled{
+    color: #ff0202;
+}
+
 a{
     font-style: normal !important;
     text-decoration: none !important;
@@ -30,4 +34,44 @@ select{
 
 .btns-delete{
     text-align: center;
+}
+
+.container-locations{
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    width: 100%;
+    list-style: none;
+    margin-left: 0.1% !important;
+    padding: 10px 0;
+    font-size: 0.9em;
+}
+
+.list-locations li{
+    list-style: none !important;
+    border: 1px solid #ddd;
+    display: table;
+    border-radius: 5px;
+    position: relative;
+    float: left;
+    margin-right: 5px;
+}
+
+.list-locations span, .list-locations p{
+    position: relative;
+    float: left;
+    padding: 5px 8px;
+}
+
+.list-locations span{
+    background-color: #ddd;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.list-locations p{
+    margin: 0 !important
+}
+
+.list-locations{
+    padding: 0;
 }

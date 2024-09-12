@@ -32,16 +32,25 @@
                         </div>
 
                         <div class="col-6">
-                            <select id="category" name="category" class="form-select form-select-lg" required>
+                            <select id="category" name="category" class="category form-select form-select-lg" required>
                                 <option value="0" selected>Categoria a vincular</option>
                                 @if(isset($categories))
                                     @foreach($categories as $category)
-                                        <option value="{{ $category->id }}">{{ $category->title }}</option>
+                                        <option class="opt-{{ $category->id }}" value="{{ $category->id }}">{{ $category->title }}</option>
                                     @endforeach
                                 @endif
                             </select>
                         </div>
                     </div>
+
+                    <b>Categorias já selecionadas:</b>   
+                    <ul class="row container-locations">
+                        <li class="txt-locations">Não há categoria(s) selecionada(s) para a localidade.</li>
+                        <li class="box-locations">
+                            <ul class="list-locations">
+                            </ul>
+                        </li>
+                    </ul>                    
 
                     <div class="mt-3 gap-2">
                         <input type="hidden" id="id" name="id" value="{{ @$location->id }}">
@@ -54,4 +63,5 @@
     </body>
     <script src="{{ url(mix('inc/file/js/global.js')) }}"></script>
     <script src="{{ url(mix('inc/file/js/adm.js')) }}"></script>
+    <script src="{{ url(mix('inc/file/js/select2.min.js')) }}"></script>
 </html>

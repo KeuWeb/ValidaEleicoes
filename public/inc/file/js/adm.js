@@ -310,34 +310,6 @@ $(document).on('click', '.del-user', function () {
   msgPopup('delete', 'Tem certeza que deseja excluir?');
   return false;
 });
-// Efetivação da exclusão do registro
-$('body').on('submit', '#formuser-delete', function (event) {
-  event.preventDefault();
-  $.ajax({
-    url: $('#route-user').val(),
-    type: "put",
-    data: $(this).serialize(),
-    dataType: 'json',
-    success: function success(response) {
-      if (response.status == 'success') {
-        $('#line-' + $('#iduser').val()).css({
-          'display': "none"
-        });
-      }
-      msgPopup(response.status, response.message);
-      return false;
-    },
-    error: function error(response) {
-      msgPopup(response.status, response.message);
-      return false;
-    },
-    statusCode: {
-      500: function _() {
-        msgPopup('error', 'Ops! Erro ao efetuar solicitação, tente mais tarde.');
-      }
-    }
-  });
-});
 })();
 
 // This entry need to be wrapped in an IIFE because it need to be isolated against other entry modules.

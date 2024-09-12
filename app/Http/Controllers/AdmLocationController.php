@@ -16,9 +16,7 @@ class AdmLocationController extends Controller
             )->where(
                 'status', 1
             )->get();
-
-            // dd($categories);
-        
+      
         return view('adm/location', [
             'categories' => $categories
         ]);
