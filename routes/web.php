@@ -79,4 +79,7 @@ Route::middleware(['web'])->group(function(){
    // Localidades
    Route::get('/adm/location',[AdmLocationController::class,'AdmLocation'])->name('adm.location');
    Route::get('/adm/locations',[AdmLocationController::class,'AdmLocations'])->name('adm.locations');
+   Route::get('/adm/location/{location}',[AdmLocationController::class, 'AdmEditLocation'])->name('adm.edit.location');
+   Route::put('/adm/location/do',[AdmLocationController::class,'AdmLocationDo'])->name('adm.location.do');
+   Route::put('adm/location/delete/do',[AdmLocationController::class, 'AdmDelLocationDo'])->name('adm.del.location.do');
 });

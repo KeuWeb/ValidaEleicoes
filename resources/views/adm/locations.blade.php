@@ -14,7 +14,7 @@
                 <form id="form-delete" name="form-delete" class="btns-delete d-none">
                     @csrf
                     @method('PUT')
-                    <input type="hidden" id="route-delete" name="route-delete" value="{{ route('adm.del.user.do') }}">
+                    <input type="hidden" id="route-delete" name="route-delete" value="{{ route('adm.del.location.do') }}">
                     <input type="hidden" id="idDelete" name="idDelete">
                     <button type="button" class="n-location btn btn-success btn-sm">Cancelar</button>
                     <button type="submit" class="y-location btn btn-danger btn-sm">Excluir</button>
@@ -69,7 +69,7 @@
                                 <div class="col-7 fw-bolder pt-1">{{ @$location->local }}</div>
                                 <div class="col-2 fw-bolder pt-1">Categoria</div>
                                 <div class="container-actions col-3 fw-bolder text-end">
-                                    <a type="button" href="{{ route('adm.edit.user',@$location->id) }}" target="_self" class="edit-user btn btn-primary btn-sm text-white"><i class="bi bi-pencil-fill pt-1 me-1 text-white"></i>Editar</a>
+                                    <a type="button" href="{{ route('adm.edit.location',@$location->id) }}" target="_self" class="edit-location btn btn-primary btn-sm text-white"><i class="bi bi-pencil-fill pt-1 me-1 text-white"></i>Editar</a>
                                     <button type="submit" data-id={{ @$location->id }} data-module="location" class="delete btn btn-danger btn-sm"><i class="bi bi-trash-fill pt-1 me-1 text-white"></i>Excluir</button>
                                 </div>
                             </li>

@@ -11,12 +11,13 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('tblocations', function (Blueprint $table) {
+        Schema::create('tbcat_locations', function (Blueprint $table) {
             $table->engine = 'InnoDB';
             $table->charset = 'utf8mb4';
             $table->collation = 'utf8mb4_unicode_ci';
             $table->id();
-            $table->string('local',300)->nullable();
+            $table->integer('location')->nullable();
+            $table->integer('category')->nullable();
             $table->timestamps();
             $table->integer('status')->default(1);
         });
@@ -27,6 +28,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('tblocations');
+        Schema::dropIfExists('tbcat_locations');
     }
 };

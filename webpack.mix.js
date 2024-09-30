@@ -43,6 +43,7 @@ mix.styles([
         'resources/adm/js/user.js',
         'resources/adm/js/category.js',
         'resources/adm/js/company.js',
+        'resources/adm/js/location.js',
         'resources/adm/js/uploads.js'
     ],'public/inc/file/js/adm.js')
     
@@ -60,8 +61,4 @@ mix.styles([
 
     .copy([
         'node_modules/jquery-mask-plugin/dist/jquery.mask.js'
-    ],'public/inc/file/js/jquery.mask.js')
-
-    .copy([
-        'node_modules/select2-bootstrap-5-theme/dist/select2.min.js'
-    ],'public/inc/file/js/select2.min.js');
+    ],'public/inc/file/js/jquery.mask.js');

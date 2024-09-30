@@ -151,6 +151,8 @@ class AdmUsersController extends Controller
                     'login' => $request->login,
                     'level' => $request->level
                 ]);
+
+                $idUser = $request->id;
             } else {
                 $user->where(
                     'id',$request->id
@@ -162,15 +164,9 @@ class AdmUsersController extends Controller
                     'password' => Hash::make($request->password),
                     'level' => $request->level
                 ]);
-            }
 
-            return response()->json([
-                'status' => "success",
-                'message' => "Dados salvos com sucesso."
-            ]);
- 
-            exit();
-            
+                $idUser = $user->id;
+            }            
         } else {
             if (empty($request->password)) {
                 return response()->json([
@@ -190,14 +186,16 @@ class AdmUsersController extends Controller
                     'created_at' => date('Y-m-d H:i:s')                
                 ]);
 
-                return response()->json([
-                    'status' => "success",
-                    'message' => "Dados salvos com sucesso."
-                ]);
-     
-                exit();
+                $idUser = $user->id;
             }
         }
+
+        return response()->json([
+            'status' => "success",
+            'message' => "Dados salvos com sucesso."
+        ]);
+
+        exit();
     }
     // Ação para excluir o registro no BD
     public function AdmDelUserDo(Request $request)

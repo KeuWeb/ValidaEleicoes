@@ -1,24 +1,35 @@
 // Salvar ou editar dados
-$('body').on('submit', '#category-adm', function(event) {
+$('body').on('submit', '#location-adm', function(event) {
     event.preventDefault();
 
     $('#salvar').val('AGUARDE...').attr('disabled','disabled');
+
+    console.log('certo');
 
     $.ajax({
         url: $('#route').val(),
         type: "put",
         data: $(this).serialize(),
+        cache: false,
         dataType: 'json',
         success: function(response) {
             
             msgPopup(response.status, response.message);
 
             if (response.status == "success") {
-                if($('#id').val() == ""){
+                
+                if ($('#id').val() == "") {
                     $('input[type=text]').val('');
+                    $('.container-locations').html('<li class="txt-locations">Não há categoria(s) selecionada(s) para a localidade.</li>');
+                    $('select option').removeAttr('disabled');
+                    $('select').prop('selectedIndex', 0);
                 }
+            }
 
-                $('#id').val(response.id);
+            if ($('#salvar').length) {
+                $('#salvar').val('SALVAR').removeAttr('disabled');
+            } else {
+                alert('Sem botão');
             }
 
             $('#salvar').val('SALVAR').removeAttr('disabled');
@@ -41,17 +52,17 @@ $('body').on('submit', '#category-adm', function(event) {
     });
 });
 // Buscador de regitros
-$(document).on('click', '#btn-search-category', function() {
+$(document).on('click', '#btn-search-location', function() {
     var search = $('#src').val();
 
     window.location = window.location.href + '?src=' + search;
 });
 // Questionamento quanto a exclusão do registro
-$(document).on('click', '.del-category', function() {
+$(document).on('click', '.del-location', function() {
 
     id = $(this).attr('data-id');
 
-    $('#idcategory').val(id);
+    $('#idlocation').val(id);
 
     msgPopup('delete', 'Tem certeza que deseja excluir?');
 
