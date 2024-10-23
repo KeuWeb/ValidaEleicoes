@@ -4,8 +4,6 @@ $('body').on('submit', '#location-adm', function(event) {
 
     $('#salvar').val('AGUARDE...').attr('disabled','disabled');
 
-    console.log('certo');
-
     $.ajax({
         url: $('#route').val(),
         type: "put",
@@ -24,12 +22,6 @@ $('body').on('submit', '#location-adm', function(event) {
                     $('select option').removeAttr('disabled');
                     $('select').prop('selectedIndex', 0);
                 }
-            }
-
-            if ($('#salvar').length) {
-                $('#salvar').val('SALVAR').removeAttr('disabled');
-            } else {
-                alert('Sem botão');
             }
 
             $('#salvar').val('SALVAR').removeAttr('disabled');

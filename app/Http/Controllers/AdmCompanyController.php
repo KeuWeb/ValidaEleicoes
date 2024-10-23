@@ -12,7 +12,7 @@ class AdmCompanyController extends Controller
     // Busca dos dados para a amostra no fomrulário, caso houver
     public function AdmCompany()
     {
-        $company = DB::table('tbelections')->select()->first();
+        $company = DB::table('tbassociation')->select()->first();
 
         if (!$company) {
             return view('adm/company');
@@ -125,30 +125,27 @@ class AdmCompanyController extends Controller
         $company = new AdmCompany();
 
         if (!empty($request->id)) {             
-            $company->where('id',$request->id)->update([
-                    'company' => $request->company,
-                    'cnpj' => $request->cnpj,
-                    'phone' => $request->phone,
-                    'email' => $request->email,
-                    'responsible' => $request->responsible,
-                    'cep' => $request->cep,
-                    'street' => $request->street,
-                    'number' => $request->number,
-                    'complement' => $request->complement,
-                    'neighborhood' => $request->neighborhood,
-                    'city' => $request->city,
-                    'uf' => $request->uf,
-                    'updated_at' => date('Y-m-d H:i:s')
+            $company->where(
+                'id',$request->id
+            )->update([
+                'company' => $request->company,
+                'cnpj' => $request->cnpj,
+                'phone' => $request->phone,
+                'email' => $request->email,
+                'responsible' => $request->responsible,
+                'cep' => $request->cep,
+                'street' => $request->street,
+                'number' => $request->number,
+                'complement' => $request->complement,
+                'neighborhood' => $request->neighborhood,
+                'city' => $request->city,
+                'uf' => $request->uf,
+                'updated_at' => date('Y-m-d H:i:s')
                 ]);
 
             $idRegistro = $request->id;
         }else{
             $company->insert([
-                'date_str_ind' => date('1970-01-01 00:00:00'),
-                'date_end_ind' => date('1970-01-01 00:00:00'),
-                'date_str_ele' => date('1970-01-01 00:00:00'),
-                'date_end_ele' => date('1970-01-01 00:00:00'),
-                'date_investigation' => date('1970-01-01 00:00:00'),
                 'company' => $request->company,
                 'cnpj' => $request->cnpj,
                 'phone' => $request->phone,

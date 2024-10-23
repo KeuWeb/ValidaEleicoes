@@ -6,8 +6,16 @@ $(document).on('keyup', '.mask', function() {
     if (tipo == 'cnpj') {
         $('#' + label).mask('00.000.000/0000-00');
     }
-
-    if (tipo == 'phone' || tipo == 'whatsapp') {
+    // RG
+    if (tipo == 'rg') {
+        $('#' + label).mask('00.000.000-0');
+    }
+    // CPF
+    if (tipo == 'cpf') {
+        $('#' + label).mask('000.000.000-00');
+    }
+    // Telefone, Celular e WhatsApp
+    if (tipo == 'phone' || tipo == 'whatsapp' || tipo == 'cellphone') {
         valor = $('#' + label).val();
         
         regra = function (valor) {

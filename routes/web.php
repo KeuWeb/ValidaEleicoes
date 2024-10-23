@@ -14,6 +14,7 @@ use App\Http\Controllers\AdmUploadsController;
 use App\Http\Controllers\AdmUsersController;
 use App\Http\Controllers\AdmCategoryController;
 use App\Http\Controllers\AdmLocationController;
+use App\Http\Controllers\AdmVotersController;
 use Illuminate\Support\Facades\Session;
 
 /*
@@ -82,4 +83,9 @@ Route::middleware(['web'])->group(function(){
    Route::get('/adm/location/{location}',[AdmLocationController::class, 'AdmEditLocation'])->name('adm.edit.location');
    Route::put('/adm/location/do',[AdmLocationController::class,'AdmLocationDo'])->name('adm.location.do');
    Route::put('adm/location/delete/do',[AdmLocationController::class, 'AdmDelLocationDo'])->name('adm.del.location.do');
+
+   // Eleitores
+   Route::get('/adm/voter',[AdmVotersController::class,'AdmVoter'])->name('adm.voter');
+   Route::get('/adm/voters',[AdmVotersController::class, 'AdmVoters'])->name('adm.voters');
+   Route::put('/adm/voter/do',[AdmVotersController::class,'AdmVoterDo'])->name('adm.voter.do');
 });

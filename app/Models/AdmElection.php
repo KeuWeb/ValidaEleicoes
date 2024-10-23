@@ -9,19 +9,16 @@ class AdmElection extends Model
 {
     use HasFactory;
 
-    protected $table = 'tbelection';
+    protected $table = 'tbelections';
     protected $primaryKey = 'id';
 
     protected $fillable =[
-        'date-str-ele',
-        'date-end-ele',
-        'date-inv-ele',
-        'date-str-ind',
-        'date-end-ind',
-        'title',
-        'cnpj',
-        'responsable',
-        'company',
-        'email'
+        'titleInd',
+        'dateIniInd',
+        'dateEndInd',
+        'titleEle',
+        'dateIniEle',
+        'dateEndEle',
+        'dateInvEle'
     ];
 }

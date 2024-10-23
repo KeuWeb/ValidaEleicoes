@@ -17,8 +17,6 @@ $('body').on('submit', '#category-adm', function(event) {
                 if($('#id').val() == ""){
                     $('input[type=text]').val('');
                 }
-
-                $('#id').val(response.id);
             }
 
             $('#salvar').val('SALVAR').removeAttr('disabled');

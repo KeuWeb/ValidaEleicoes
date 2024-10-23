@@ -4,6 +4,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AdmCompanyController;
 use App\Http\Controllers\AdmUsersController;
+use App\Http\Controllers\AdmVotersController;
 
 /*
 |--------------------------------------------------------------------------
@@ -27,6 +28,8 @@ Route::middleware(['api'])->group(function() {
     Route::get('validate/cnpj/do/',[AdmCompanyController::class,'AdmCnpjDo'])->name('adm.valcnpj.do');
     // Validação da força da senha (password)
     Route::get('validate/password/do/',[AdmUsersController::class,'AdmPasswordDo'])->name('adm.valpassword.do');
+    // Busca dos dados para a listagem das categorias com base na localidade
+    Route::put('categories/list/do/',[AdmVotersController::class,'AdmCategoriesListDo'])->name('adm.categories.list.do');
 });    
 
 

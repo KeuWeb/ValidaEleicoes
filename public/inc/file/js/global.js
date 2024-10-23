@@ -3116,7 +3116,7 @@ $(document).on('change', '.category', function () {
   var location = $('option:selected', this).text();
   var id_location = $(this).val();
   if (id_location != "") {
-    var html_location = "<li class=location-" + id_location + "><span data-id=\"" + id_location + "\" class=\"dlt-cat\">x</span><p>" + location + "</p></li>";
+    var html_location = "<li class=location-" + id_location + "><span data-id=\"" + id_location + "\" class=\"dlt-cat\"><i class=\"bi bi-trash-fill pt-1 text-white\"></i></span><p>" + location + "</p></li>";
     if (id_location == 0) {
       $('.list-locations').html(html_location);
       $('#categories').val(id_location);
@@ -5779,7 +5779,16 @@ $(document).on('keyup', '.mask', function () {
   if (tipo == 'cnpj') {
     $('#' + label).mask('00.000.000/0000-00');
   }
-  if (tipo == 'phone' || tipo == 'whatsapp') {
+  // RG
+  if (tipo == 'rg') {
+    $('#' + label).mask('00.000.000-0');
+  }
+  // CPF
+  if (tipo == 'cpf') {
+    $('#' + label).mask('000.000.000-00');
+  }
+  // Telefone, Celular e WhatsApp
+  if (tipo == 'phone' || tipo == 'whatsapp' || tipo == 'cellphone') {
     valor = $('#' + label).val();
     regra = function regra(valor) {
       if (valor.replace(/\D/g, '').length === 11) {

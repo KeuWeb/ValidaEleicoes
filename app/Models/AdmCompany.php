@@ -9,7 +9,7 @@ class AdmCompany extends Model
 {
     use HasFactory;
 
-    protected $table = 'tbelections';
+    protected $table = 'tbassociation';
     protected $primaryKey = 'id';
 
     protected $fillable =[

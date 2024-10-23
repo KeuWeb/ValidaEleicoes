@@ -1,5 +1,42 @@
+// Abilitar campo categoria para listagem respectiva
+$(document).on('change', '#local', function() {
+
+    if ($('#local option:selected').val() != '') {
+        var route = $(this).attr('data-route-url');
+
+        $.ajax({
+            url: route,
+            type: "put",
+            data: {
+                location: $('#local option:selected').val()
+            },
+            dataType: 'json',
+            success: function(response) {
+    
+                if (response.status == "success") {
+                    $('#category').html(response.html).removeAttr('disabled');
+                } else {
+                    $('#category').attr('disabled', 'disabled');
+                }
+    
+                return false;
+            },
+            error: function() {
+    
+                msgPopup('error', 'Ops! Falha ao buscar a lista da(s) categoria(s)');
+    
+                return false;
+            },
+            statusCode: {
+                500: function() {
+                    msgPopup('error', 'Ops! Erro ao efetuar solicitação, tente mais tarde.');
+                }
+            }
+        });
+    }
+});
 // Salvar ou editar dados
-$('body').on('submit', '#user-adm', function(event) {
+$('body').on('submit', '#voter-adm', function(event) {
     event.preventDefault();
 
     $('#salvar').val('AGUARDE...').attr('disabled','disabled');
@@ -23,7 +60,7 @@ $('body').on('submit', '#user-adm', function(event) {
                     });
                 }
 
-                $('#id').val($idUser);
+                $('#id').val($idVoter);
             }
 
             $('#salvar').val('SALVAR').removeAttr('disabled');

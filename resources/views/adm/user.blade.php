@@ -64,7 +64,7 @@
                         <div class="col-4">
                             <div class="form-floating mb-3">
                                 <input type="password" class="form-control password" id="password" name="password" placeholder="senha valida" value="" <?php if(empty(@$user->id)){ ?>required <?php } ?>>
-                                <label for="login">Senha<?php if(empty(@$user->id)){ ?>*<?php } ?></label>
+                                <label for="password">Senha<?php if(empty(@$user->id)){ ?>*<?php } ?></label>
                             </div>
                         </div>
                     </div>

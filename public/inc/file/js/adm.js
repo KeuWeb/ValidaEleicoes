@@ -46,6 +46,7 @@ $('body').on('submit', '#login-adm', function (event) {
 // Submeter o fomrulário
 $('body').on('submit', '#type-adm', function (event) {
   event.preventDefault();
+  $('#salvar').val('AGUARDE...').attr('disabled', 'disabled');
   $.ajax({
     url: $('#route').val(),
     type: "put",
@@ -53,11 +54,18 @@ $('body').on('submit', '#type-adm', function (event) {
     dataType: 'json',
     success: function success(response) {
       msgPopup(response.status, response.message);
+      $('#salvar').val('SALVAR').removeAttr('disabled');
       return false;
     },
     error: function error(response) {
       msgPopup(response.status, response.message);
+      $('#salvar').val('SALVAR').removeAttr('disabled');
       return false;
+    },
+    statusCode: {
+      500: function _() {
+        msgPopup('error', 'Ops! Erro ao efetuar solicitação, tente mais tarde.');
+      }
     }
   });
 });
@@ -71,6 +79,7 @@ $('body').on('submit', '#type-adm', function (event) {
 // Submeter o fomrulário
 $('body').on('submit', '#form-adm', function (event) {
   event.preventDefault();
+  $('#salvar').val('AGUARDE...').attr('disabled', 'disabled');
   $.ajax({
     url: $('#route').val(),
     type: "put",
@@ -78,11 +87,18 @@ $('body').on('submit', '#form-adm', function (event) {
     dataType: 'json',
     success: function success(response) {
       msgPopup(response.status, response.message);
+      $('#salvar').val('SALVAR').removeAttr('disabled');
       return false;
     },
     error: function error(response) {
       msgPopup(response.status, response.message);
+      $('#salvar').val('SALVAR').removeAttr('disabled');
       return false;
+    },
+    statusCode: {
+      500: function _() {
+        msgPopup('error', 'Ops! Erro ao efetuar solicitação, tente mais tarde.');
+      }
     }
   });
 });
@@ -202,6 +218,8 @@ $('body').on('submit', '#ele-adm', function (event) {
     dataType: 'json',
     success: function success(response) {
       msgPopup(response.status, response.message);
+      $('#idIndication').val(response.idInd);
+      $('#idElection').val(response.idEle);
       return false;
     },
     error: function error(response) {
@@ -242,7 +260,82 @@ $('body').on('submit', '#user-adm', function (event) {
             'background-color': "#E9ECEF"
           });
         }
-        $('#id').val(response.id);
+        $('#id').val($idUser);
+      }
+      $('#salvar').val('SALVAR').removeAttr('disabled');
+      return false;
+    },
+    error: function error(response) {
+      msgPopup(response.status, response.message);
+      $('#salvar').val('SALVAR').removeAttr('disabled');
+      return false;
+    },
+    statusCode: {
+      500: function _() {
+        msgPopup('error', 'Ops! Erro ao efetuar solicitação, tente mais tarde.');
+      }
+    }
+  });
+});
+})();
+
+// This entry need to be wrapped in an IIFE because it need to be isolated against other entry modules.
+(() => {
+/*!***********************************!*\
+  !*** ./resources/adm/js/voter.js ***!
+  \***********************************/
+// Abilitar campo categoria para listagem respectiva
+$(document).on('change', '#local', function () {
+  if ($('#local option:selected').val() != '') {
+    var route = $(this).attr('data-route-url');
+    $.ajax({
+      url: route,
+      type: "put",
+      data: {
+        location: $('#local option:selected').val()
+      },
+      dataType: 'json',
+      success: function success(response) {
+        if (response.status == "success") {
+          $('#category').html(response.html).removeAttr('disabled');
+        } else {
+          $('#category').attr('disabled', 'disabled');
+        }
+        return false;
+      },
+      error: function error() {
+        msgPopup('error', 'Ops! Falha ao buscar a lista da(s) categoria(s)');
+        return false;
+      },
+      statusCode: {
+        500: function _() {
+          msgPopup('error', 'Ops! Erro ao efetuar solicitação, tente mais tarde.');
+        }
+      }
+    });
+  }
+});
+// Salvar ou editar dados
+$('body').on('submit', '#voter-adm', function (event) {
+  event.preventDefault();
+  $('#salvar').val('AGUARDE...').attr('disabled', 'disabled');
+  $.ajax({
+    url: $('#route').val(),
+    type: "put",
+    data: $(this).serialize(),
+    dataType: 'json',
+    success: function success(response) {
+      msgPopup(response.status, response.message);
+      if (response.status == "success") {
+        if ($('#id').val() == "") {
+          $('input[type=text],input[type=email],input[type=password]').val('');
+          $('#level').val($("#level option:first").val());
+          $('#doc-progress-bar').css({
+            'width': "0%",
+            'background-color': "#E9ECEF"
+          });
+        }
+        $('#id').val($idVoter);
       }
       $('#salvar').val('SALVAR').removeAttr('disabled');
       return false;
@@ -281,7 +374,6 @@ $('body').on('submit', '#category-adm', function (event) {
         if ($('#id').val() == "") {
           $('input[type=text]').val('');
         }
-        $('#id').val(response.id);
       }
       $('#salvar').val('SALVAR').removeAttr('disabled');
       return false;
@@ -357,7 +449,6 @@ $('body').on('submit', '#company-adm', function (event) {
 $('body').on('submit', '#location-adm', function (event) {
   event.preventDefault();
   $('#salvar').val('AGUARDE...').attr('disabled', 'disabled');
-  console.log('certo');
   $.ajax({
     url: $('#route').val(),
     type: "put",
@@ -373,11 +464,6 @@ $('body').on('submit', '#location-adm', function (event) {
           $('select option').removeAttr('disabled');
           $('select').prop('selectedIndex', 0);
         }
-      }
-      if ($('#salvar').length) {
-        $('#salvar').val('SALVAR').removeAttr('disabled');
-      } else {
-        alert('Sem botão');
       }
       $('#salvar').val('SALVAR').removeAttr('disabled');
       return false;

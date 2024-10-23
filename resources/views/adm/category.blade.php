@@ -16,7 +16,7 @@
         </div>
         <div id="container-system">
             @include('adm/header')
-            <p class="m-3 p-3 bg-success text-white"><a href="{{ url('/adm/cpanel') }}">CPanel</a> <i class="bi bi-caret-right-fill text-white"></i> <?php if(!empty(@$category->id)){?><a href="{{ route('adm.users') }}" target="_self">Editar/Excluir Categoria</a> <i class="bi bi-caret-right-fill text-white"></i> Editar Categoria - ({{ @$category->title }})<?php }else{ ?>Cadastrar Categoria<?php } ?></p>
+            <p class="m-3 p-3 bg-success text-white"><a href="{{ url('/adm/cpanel') }}">CPanel</a> <i class="bi bi-caret-right-fill text-white"></i> <?php if(!empty(@$category->id)){?><a href="{{ route('adm.categories') }}" target="_self">Editar/Excluir Categoria</a> <i class="bi bi-caret-right-fill text-white"></i> Editar Categoria - ({{ @$category->title }})<?php }else{ ?>Cadastrar Categoria<?php } ?></p>
             <div class="m-3 px-2 pt-3 py-2 row bg-white">
                 <p>Aqui você poderá cadastrar uma nova Categoria, sendo:</p>
                 <form id="category-adm" name="category-adm" autocomplete="off" method="PUT">

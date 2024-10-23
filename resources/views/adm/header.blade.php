@@ -51,22 +51,16 @@
                   <li><a class="dropdown-item" href="{{ route('adm.locations') }}">Editar/Excluir Localidade</a></li>
                 </ul>
               </li> 
-              <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                  Designações
-                </a>
-                <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                  <li><a class="dropdown-item" href="">Indicações</a></li>
-                  <li><a class="dropdown-item" href="election">Eleições</a></li>
-                </ul>
-              </li> 
+              <li class="nav-item">
+                <a class="nav-link" href="{{ route('adm.election') }}">Eleição</a>
+              </li>
               <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                   Eleitores
                 </a>
                 <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                  <li><a class="dropdown-item" href="#">Cadastrar Eleitor</a></li>
-                  <li><a class="dropdown-item" href="#">Editar/Excluir Eleitor</a></li>
+                  <li><a class="dropdown-item" href="{{ route('adm.voter') }}">Cadastrar Eleitor</a></li>
+                  <li><a class="dropdown-item" href="{{ route('adm.voters') }}">Editar/Excluir Eleitor</a></li>
                   <li><a class="dropdown-item" href="#">Importar Eleitor</a></li>
                 </ul>
               </li>   

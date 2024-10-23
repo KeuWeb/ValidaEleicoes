@@ -40,15 +40,13 @@
     
                 <ul id="container-list" name="container-list" class="list-group">
                     <li class="list-group-item list-group-item-success">
-                        <div class="col-7 fw-bolder text-success">Local</div>
-                        <div class="col-2 fw-bolder text-success">Categoria</div>
+                        <div class="col-9 fw-bolder text-success">Local</div>
                     </li>
     
                     @if(@$locations->isEmpty() && @$search['src'] != '')
     
                         <li class="list-group-item">
-                            <div class="col-7 fw-bolder pt-1">Não há registro(s) com o termo digitado (<b class="fw-bold">{{ @$search['src']; }}</b>).</div>
-                            <div class="col-2 fw-bolder pt-1"></div>
+                            <div class="col-9 fw-bolder pt-1">Não há registro(s) com o termo digitado (<b class="fw-bold">{{ @$search['src']; }}</b>).</div>
                             <div class="container-actions col-3 fw-bolder text-end"></div>
                         </li>
     
@@ -57,8 +55,7 @@
                         @if(@$locations->isEmpty())
     
                             <li class="list-group-item">
-                                <div class="col-7 fw-bolder pt-1">Não há registro(s) cadastrado(s) no Sistema.</div>
-                                <div class="col-2 fw-bolder pt-1"></div>
+                                <div class="col-9 fw-bolder pt-1">Não há registro(s) cadastrado(s) no Sistema.</div>
                                 <div class="container-actions col-3 fw-bolder text-end"></div>
                             </li>
                         @else
@@ -66,8 +63,7 @@
                             @foreach($locations as $location)
     
                             <li id="line-<?=$location->id;?>" class="list-group-item">
-                                <div class="col-7 fw-bolder pt-1">{{ @$location->local }}</div>
-                                <div class="col-2 fw-bolder pt-1">Categoria</div>
+                                <div class="col-9 fw-bolder pt-1">{{ @$location->local }}</div>
                                 <div class="container-actions col-3 fw-bolder text-end">
                                     <a type="button" href="{{ route('adm.edit.location',@$location->id) }}" target="_self" class="edit-location btn btn-primary btn-sm text-white"><i class="bi bi-pencil-fill pt-1 me-1 text-white"></i>Editar</a>
                                     <button type="submit" data-id={{ @$location->id }} data-module="location" class="delete btn btn-danger btn-sm"><i class="bi bi-trash-fill pt-1 me-1 text-white"></i>Excluir</button>

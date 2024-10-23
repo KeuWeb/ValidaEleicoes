@@ -41,6 +41,7 @@ mix.styles([
         'resources/adm/js/mailing.js',
         'resources/adm/js/election.js',
         'resources/adm/js/user.js',
+        'resources/adm/js/voter.js',
         'resources/adm/js/category.js',
         'resources/adm/js/company.js',
         'resources/adm/js/location.js',

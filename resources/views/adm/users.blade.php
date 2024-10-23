@@ -45,6 +45,7 @@
                     </li>
     
                     @if(@$users->isEmpty() && @$search['src'] != '')    
+                    
                         <li class="list-group-item">
                             <div class="col-7 fw-bolder pt-1">Não há registro(s) com o termo digitado (<b class="fw-bold">{{ @$search['src']; }}</b>).</div>
                             <div class="col-2 fw-bolder pt-1"></div>
@@ -60,6 +61,7 @@
                                 <div class="col-2 fw-bolder pt-1"></div>
                                 <div class="container-actions col-3 fw-bolder text-end"></div>
                             </li>
+                            
                         @else
     
                             @foreach($users as $user)

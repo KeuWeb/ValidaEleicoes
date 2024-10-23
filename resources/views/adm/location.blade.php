@@ -17,7 +17,7 @@
         <div id="container-system">
             @include('adm/header')
             <p class="m-3 p-3 bg-success text-white"><a href="{{ url('/adm/cpanel') }}">CPanel</a> <i class="bi bi-caret-right-fill text-white"></i> <?php if(!empty(@$location->id)){?><a href="{{ route('adm.locations') }}" target="_self">Editar/Excluir Localidades</a> <i class="bi bi-caret-right-fill text-white"></i> Editar Localidade - ({{ @$location->local }})<?php }else{ ?>Cadastrar Localidade<?php } ?></p>
-            <div class="m-3 px-2 pt-3 py-2 row bg-white">
+            <div class="m-3 px-2 pt-3 py-2 row bg-white" style="padding-bottom: 1rem !important;">
                 <p>Aqui você poderá cadastrar uma nova localidade, sendo:</p>
                 <form id="location-adm" name="location-adm" autocomplete="off" method="PUT">
                 @csrf
@@ -32,30 +32,42 @@
                         </div>
 
                         <div class="col-6">
-                            <select id="category" name="category" class="category form-select form-select-lg" required>
+                            <select id="category" name="category" class="category form-select form-select-lg">
                                 <option value="" selected>Categoria a vincular</option>
                                 <option class="opt-0" value="0">Todas as categorias</option>
                                 @if(isset($categories))
                                     @foreach($categories as $category)
-                                        <option class="opt-{{ $category->id }}" value="{{ $category->id }}">{{ $category->title }}</option>
+                                        <option @if (isset($catsLocations)) @if (in_array($category->id,$catsLocations)) disabled @endif @endif class="opt-{{ $category->id }}" value="{{ $category->id }}">{{ $category->title }}</option>
                                     @endforeach
                                 @endif
                             </select>
                         </div>
                     </div>
-
                     <b>Categorias já selecionadas:</b>   
                     <ul class="row container-locations">
-                        <li class="txt-locations">Não há categoria(s) selecionada(s) para a localidade.</li>
+                        @if(isset($catsLocation))
                         <li class="box-locations">
                             <ul class="list-locations">
-                                
+                                @foreach($catsLocation as $catLocation)
+                                    <li class="location-{{ $catLocation->id }}">
+                                        <span class="dlt-cat" data-id="{{ $catLocation->id }}"><i class="bi bi-trash-fill pt-1 text-white"></i></span>
+                                        <p>{{ $catLocation->title }}</p>
+                                    </li>
+                                @endforeach
                             </ul>
                         </li>
+                        @else
+                            <li class="txt-locations">Não há categoria(s) selecionada(s) para a localidade.</li>
+                                <li class="box-locations">
+                                    <ul class="list-locations">
+                                        
+                                    </ul>
+                            </li>
+                        @endif
                     </ul>                    
 
                     <div class="mt-3 gap-2">
-                        <input type="hidden" id="categories" name="categories" value="">
+                        <input type="hidden" id="categories" name="categories" @if (isset($catsLocations)) value="{{ implode(',',$catsLocations) ?? null }}" @endif>
                         <input type="hidden" id="id" name="id" value="{{ @$location->id }}">
                         <input type="hidden" id="route" name="route" value="{{ route('adm.location.do') }}">
                         <input id="salvar" name="salvar" type="submit" value="SALVAR" class="btn btn-success btn-lg">

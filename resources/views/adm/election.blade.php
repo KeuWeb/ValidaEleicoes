@@ -23,58 +23,129 @@
                 @csrf
                 @method('PUT')
 
+                @if(empty(!@$type) && @$type->type >= 3)
+
+                    <h6 class="mt-3"><b>Dados da Indicação</b></h6>
+
+                    <div class="row">
+                        <div class="col-6">
+                            <div class="form-floating mb-3">
+                                <input type="text" class="form-control" id="titleInd" name="titleInd" @if(!empty($indication)) value="{{ $indication->title }}" @endif placeholder="Titulo" required>
+                                <label for="titleInd">Título*</label>
+                            </div>                       
+                        </div>
+
+                        <div class="col-3">
+                            <div class="form-floating mb-3">
+                                <input type="date" class="form-control" id="dateIniInd" name="dateIniInd" @if(!empty($indication)) value="{{ date('Y-m-d',strtotime($indication->date_initial)) }}" @endif required>
+                                <label for="dateIniInd">Data inicial <small class="fst-italic">(indicação)</small>*</label>
+                            </div>                       
+                        </div>
+
+                        <div class="col-3">
+                            <div class="form-floating mb-3">
+                                <input type="time" class="form-control" id="hourIniInd" name="hourIniInd" @if(!empty($indication)) value="{{ $indication->hour_initial }}" @endif required>
+                                <label for="hourIniInd">Hora data final <small class="fst-italic">(indicação)</small>*</label>
+                            </div>                       
+                        </div>
+
+                        <input type="hidden" name="indication" id="indication" value="I">
+                        <input type="hidden" name="idIndication" id="idIndication" @if(!empty($indication)) value="{{ $indication->id }}" @endif>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-3">
+                            <div class="form-floating mb-3">
+                                <input type="date" class="form-control" id="dateEndInd" name="dateEndInd" @if(!empty($indication)) value="{{ date('Y-m-d',strtotime($indication->date_end)) }}" @endif required>
+                                <label for="dateEndInd">Data final <small class="fst-italic">(indicação)</small>*</label>
+                            </div>                       
+                        </div>
+
+                        <div class="col-3">
+                            <div class="form-floating mb-3">
+                                <input type="time" class="form-control" id="hourEndInd" name="hourEndInd" @if(!empty($indication)) value="{{ $indication->hour_end }}" @endif required>
+                                <label for="hourEndInd">Hora data final <small class="fst-italic">(indicação)</small>*</label>
+                            </div>                       
+                        </div>
+                             
+                        @if ($type->form_aval == 2)
+
+                        <div class="col-3">
+                            <div class="form-floating mb-3">
+                                <input type="date" class="form-control" id="dateInvInd" name="dateInvInd" @if(!empty($indication)) value="{{ date('Y-m-d',strtotime($indication->date_invite)) }}" @endif required>
+                                <label for="dateInvInd">Data apuração <small class="fst-italic">(indicação)</small>*</label>
+                            </div>                       
+                        </div>
+
+                        <div class="col-3">
+                            <div class="form-floating mb-3">
+                                <input type="time" class="form-control" id="hourInvInd" name="hourInvInd" @if(!empty($indication)) value="{{ date('H:i',strtotime($indication->hour_invite)) }}" @endif required>
+                                <label for="hourInvInd">Hora data apuração <small class="fst-italic">(indicação)</small>*</label>
+                            </div>                       
+                        </div>
+
+                        @endif
+
+                    </div>
+
+                @endif
+
                     <h6 class="mt-3"><b>Dados da Eleição</b></h6>
 
                     <div class="row">
                         <div class="col-6">
                             <div class="form-floating mb-3">
-                                <input type="text" class="form-control" id="title" name="title" placeholder="Titulo" required>
-                                <label for="title">Título*</label>
+                                <input type="text" class="form-control" id="titleEle" name="titleEle" placeholder="Titulo" @if(!empty($election)) value="{{ $election->title }}" @endif required>
+                                <label for="titleEle">Título*</label>
                             </div>                       
                         </div>
 
                         <div class="col-3">
                             <div class="form-floating mb-3">
-                                <input type="date" class="form-control" id="date-str-ele" name="date-str-ele" required>
-                                <label for="date-str-ele">Data inicial <small class="fst-italic">(eleição)</small>*</label>
+                                <input type="date" class="form-control" id="dateIniEle" name="dateIniEle" @if(!empty($election)) value="{{ date('Y-m-d',strtotime($election->date_initial)) }}" @endif required>
+                                <label for="dateIniEle">Data inicial <small class="fst-italic">(eleição)</small>*</label>
                             </div>                       
                         </div>
 
                         <div class="col-3">
                             <div class="form-floating mb-3">
-                                <input type="date" class="form-control" id="date-end-ele" name="date-end-ele" required>
-                                <label for="date-end-ele">Data final <small class="fst-italic">(eleição)</small>*</label>
+                                <input type="time" class="form-control" id="hourIniEle" name="hourIniEle" @if(!empty($election)) value="{{ date('H:i',strtotime($election->hour_initial)) }}" @endif required>
+                                <label for="hourIniEle">Hora data inicial <small class="fst-italic">(eleição)</small>*</label>
                             </div>                       
                         </div>
-
                     </div>
 
                     <div class="row">
-                        <div class="col-4">
+                        <div class="col-3">
                             <div class="form-floating mb-3">
-                                <input type="date" class="form-control" id="date-inv-ele" name="date-inv-ele" required>
-                                <label for="date-inv-ele">Data apuração <small class="fst-italic">(eleição)</small>*</label>
+                                <input type="date" class="form-control" id="dateEndEle" name="dateEndEle" @if(!empty($election)) value="{{ date('Y-m-d',strtotime($election->date_end)) }}" @endif required>
+                                <label for="dateEndEle">Data final <small class="fst-italic">(eleição)</small>*</label>
                             </div>                       
                         </div>
 
-                        @if(empty(!@$type) && @$type >= 3)
-
-                        <div class="col-4">
+                        <div class="col-3">
                             <div class="form-floating mb-3">
-                                <input type="date" class="form-control" id="date-str-ind" name="date-str-ind" required>
-                                <label for="date-str-ind">Data inicial <small class="fst-italic">(indicação)</small>*</label>
+                                <input type="time" class="form-control" id="hourEndEle" name="hourEndEle" @if(!empty($election)) value="{{ date('H:i',strtotime($election->hour_end)) }}" @endif required>
+                                <label for="hourEndEle">Hora data final <small class="fst-italic">(eleição)</small>*</label>
                             </div>                       
                         </div>
 
-                        <div class="col-4">
+                        <div class="col-3">
                             <div class="form-floating mb-3">
-                                <input type="date" class="form-control" id="date-end-ind" name="date-end-ind" required>
-                                <label for="date-end-ind">Data final <small class="fst-italic">(indicação)</small>*</label>
+                                <input type="date" class="form-control" id="dateInvEle" name="dateInvEle" @if(!empty($election)) value="{{ date('Y-m-d',strtotime($election->date_invite)) }}" @endif required>
+                                <label for="dateInvEle">Data apuração <small class="fst-italic">(eleição)</small>*</label>
                             </div>                       
                         </div>
 
-                        @endif
+                        <div class="col-3">
+                            <div class="form-floating mb-3">
+                                <input type="time" class="form-control" id="hourInvEle" name="hourInvEle" @if(!empty($election)) value="{{ date('H:i',strtotime($election->hour_invite)) }}" @endif required>
+                                <label for="hourInvEle">Hora data apuração <small class="fst-italic">(eleição)</small>*</label>
+                            </div>                       
+                        </div>
                         
+                        <input type="hidden" name="election" id="election" value="E">
+                        <input type="hidden" name="idElection" id="idElection" @if(!empty($election)) value="{{ $election->id }}" @endif>
                     </div>
                     <div class="mt-3 gap-2">
                         <input type="hidden" id="route" name="route" value="{{ route('adm.election.do') }}">

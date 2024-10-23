@@ -16,13 +16,14 @@ return new class extends Migration
             $table->charset = 'utf8mb4';
             $table->collation = 'utf8mb4_unicode_ci';
             $table->id();
-            $table->string('name',300);
+            $table->string('fullname',300);
             $table->char('rg',15)->nullable();
             $table->char('cpf',15)->nullable();
             $table->char('other_doc',50)->nullable();
             $table->string('email',300)->nullable();
-            $table->bigInteger('category')->nullable();
+            $table->biginteger('category')->nullable();
             $table->bigInteger('local')->nullable();
+            $table->string('password',300);
             $table->timestamps();
             $table->integer('status')->default(1);
         });

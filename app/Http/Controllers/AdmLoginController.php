@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Session;
 use App\Models\AdmLogin;
@@ -40,6 +41,8 @@ class AdmLoginController extends Controller
                 exit();
             } else {
                 if ($login && Hash::check($request->password,$login->password)) {
+                    $location = DB::table('tbconfigs')->select('form_local')->first();
+
                     $request->session()->put('id',$login->id);
                     $request->session()->put('name',$login->name);
 

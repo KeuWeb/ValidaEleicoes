@@ -151,8 +151,6 @@ class AdmUsersController extends Controller
                     'login' => $request->login,
                     'level' => $request->level
                 ]);
-
-                $idUser = $request->id;
             } else {
                 $user->where(
                     'id',$request->id
@@ -164,9 +162,9 @@ class AdmUsersController extends Controller
                     'password' => Hash::make($request->password),
                     'level' => $request->level
                 ]);
-
-                $idUser = $user->id;
-            }            
+            }    
+            
+            $idUser = $request->id;
         } else {
             if (empty($request->password)) {
                 return response()->json([
@@ -186,13 +184,14 @@ class AdmUsersController extends Controller
                     'created_at' => date('Y-m-d H:i:s')                
                 ]);
 
-                $idUser = $user->id;
+                $idUser = $user->latest()->first()->id;
             }
         }
 
         return response()->json([
             'status' => "success",
-            'message' => "Dados salvos com sucesso."
+            'message' => "Dados salvos com sucesso.",
+            'id' => $idUser
         ]);
 
         exit();

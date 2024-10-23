@@ -11,6 +11,9 @@ $('body').on('submit', '#ele-adm', function(event) {
             
             msgPopup(response.status, response.message);
 
+            $('#idIndication').val(response.idInd);
+            $('#idElection').val(response.idEle);
+
             return false;
         },
         error: function(response) {

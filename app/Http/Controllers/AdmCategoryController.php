@@ -38,6 +38,13 @@ class AdmCategoryController extends Controller
             'categories' => $categories
         ]);
     }
+    // Ação para direcionar para a pagina da edição do cadastro selecionado
+    public function AdmEditCategory(AdmCategories $category)
+    {
+        return view('adm/category', [
+            'category' => $category
+        ]);
+    }
     // Requisição para efetuar a gravação dos dados editados no BD
     public function AdmCategoryDo(Request $request)
     {
@@ -53,16 +60,29 @@ class AdmCategoryController extends Controller
                 'title' => 'required|string'
             ]);
 
-            $com = new AdmCategories();
+            $cat = new AdmCategories();
 
-            $com->insert([
-                'title' => $request->title,
-                'created_at' => date('Y-m-d h:i:s')
+            if (!empty($request->id)) { 
+                $cat->where(
+                    'id',$request->id
+                )->update([
+                    'title' => $request->title
                 ]);
+
+                $idCategory = $request->id;
+            } else {
+                $cat->insert([
+                    'title' => $request->title,
+                    'created_at' => date('Y-m-d h:i:s')
+                ]);
+
+                $idCategory = $cat->latest()->first()->id;
+            }
 
             return response()->json([
                 'status' => "success",
-                'message' => "Dado salvo com sucesso."
+                'message' => "Dado salvo com sucesso.",
+                'id' => $idCategory
             ]);
 
             exit(); 

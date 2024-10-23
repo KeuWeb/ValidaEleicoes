@@ -51,8 +51,31 @@ class AdmLocationController extends Controller
     // Ação para direcionar para a pagina da edição do cadastro selecionado
     public function AdmEditLocation(AdmLocations $location)
     {
+        $categories = DB::table('tbcategories')->orderBy(
+            'title', 'ASC'
+        )->where(
+            'status', 1
+        )->get();
+
+        $catsLocations  = DB::table('tbcat_locations')->where(
+            'location', $location->id
+        )->pluck(
+            'category'
+        )->toArray();
+
+        if (isset($catsLocations)) {
+            $catsLocation = DB::table('tbcategories')->orderBy(
+                'title', 'ASC'
+            )->whereIn(
+                'id', $catsLocations
+            )->get();
+        }
+
         return view('adm/location', [
-            'location' => $location
+            'categories' => $categories,
+            'location' => $location,
+            'catsLocations' => $catsLocations,
+            'catsLocation' => $catsLocation
         ]);
     }
     // Ação para cadastrar os dados no Banco de Dados
@@ -92,14 +115,15 @@ class AdmLocationController extends Controller
                 'local' => $request->local
             ]);
 
-            $catLocation->where('category', $request->id)->delete();
+            $catLocation->where('location', $request->id)->delete();
 
             $arr_categories = explode(',', $request->categories);
 
             for($c = 0;$c < count($arr_categories);$c++) {
                 $catLocation->insert([
-                    'location' => $arr_categories[$c],
-                    'category' => $request->id
+                    'category' => $arr_categories[$c],
+                    'location' => $request->id,
+                    'created_at' => date('Y-m-d H:i:s')
                 ]);
             }
 
@@ -128,5 +152,33 @@ class AdmLocationController extends Controller
         ]);
 
         exit();
+    }
+    // Ação para excluir o registro no BD
+    public function AdmDelLocationDo(Request $request)
+    {
+        if (!empty($request)) {
+            $location = new AdmLocations();
+
+            $location->where(
+                'id',$request->idDelete
+            )->update([
+                'status' => 2
+            ]);
+
+            $cats = new AdmCatLocations();
+
+            $cats->where(
+                'location', $request->idDelete
+            )->update([
+                'status' => 2
+            ]);
+
+            return response()->json([
+                'status' => "success",
+                'message' => "Registro excluido com sucesso."
+            ]);
+    
+            exit();
+        }
     }
 }
