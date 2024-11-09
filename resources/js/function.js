@@ -55,10 +55,12 @@ $(document).on('click', '#btn-search', function() {
 $(document).on('change', '.category', function() {
 
     var location = $('option:selected', this).text();
-    var id_location = $(this).val();
+    var id_location = $('option:selected', this).val();
 
     if (id_location != "") {
         var html_location = "<li class=location-" + id_location + "><span data-id=\"" + id_location + "\" class=\"dlt-cat\"><i class=\"bi bi-trash-fill pt-1 text-white\"></i></span><p>" + location + "</p></li>";
+
+        console.log(html_location);
 
         if (id_location == 0) {
             $('.list-locations').html(html_location);
@@ -69,10 +71,6 @@ $(document).on('change', '.category', function() {
                 $('.list-locations').html('');
                 $('#categories').val('');
             }
-
-            $('.txt-locations').css({
-                'display': 'none'
-            });
         
             $('.opt-' + id_location).attr('disabled', 'disabled');
         
@@ -87,6 +85,10 @@ $(document).on('change', '.category', function() {
             }
     
         }
+
+        $('.txt-locations').css({
+            'display': 'none'
+        });
     }
 
 });

@@ -285,14 +285,14 @@ $('body').on('submit', '#user-adm', function (event) {
   !*** ./resources/adm/js/voter.js ***!
   \***********************************/
 // Abilitar campo categoria para listagem respectiva
-$(document).on('change', '#local', function () {
-  if ($('#local option:selected').val() != '') {
+$(document).on('change', '#local_voter', function () {
+  if ($('#local_voter option:selected').val() != '') {
     var route = $(this).attr('data-route-url');
     $.ajax({
       url: route,
       type: "put",
       data: {
-        location: $('#local option:selected').val()
+        location: $('#local_voter option:selected').val()
       },
       dataType: 'json',
       success: function success(response) {
@@ -326,6 +326,7 @@ $('body').on('submit', '#voter-adm', function (event) {
     dataType: 'json',
     success: function success(response) {
       msgPopup(response.status, response.message);
+      $('#salvar').val('SALVAR').removeAttr('disabled');
       if (response.status == "success") {
         if ($('#id').val() == "") {
           $('input[type=text],input[type=email],input[type=password]').val('');
@@ -334,10 +335,10 @@ $('body').on('submit', '#voter-adm', function (event) {
             'width': "0%",
             'background-color': "#E9ECEF"
           });
+          $('#local_voter').prop('selectedIndex', 0);
+          $('#category').html('<option value="" selected="selected">Categoria*</option>').attr('disabled', 'disabled');
         }
-        $('#id').val($idVoter);
       }
-      $('#salvar').val('SALVAR').removeAttr('disabled');
       return false;
     },
     error: function error(response) {
@@ -460,7 +461,8 @@ $('body').on('submit', '#location-adm', function (event) {
       if (response.status == "success") {
         if ($('#id').val() == "") {
           $('input[type=text]').val('');
-          $('.container-locations').html('<li class="txt-locations">Não há categoria(s) selecionada(s) para a localidade.</li>');
+          $('#categories').val('');
+          $('.container-locations').html('<li class="txt-locations">Não há categoria(s) selecionada(s) para a localidade.</li><li class="box-locations"><ul class="list-locations"></ul></li>');
           $('select option').removeAttr('disabled');
           $('select').prop('selectedIndex', 0);
         }

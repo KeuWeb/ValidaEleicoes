@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\DB;
 use App\Models\AdmCompany;
 
@@ -33,56 +32,6 @@ class AdmCompanyController extends Controller
                 'uf' => $company->uf
             ]);
         }
-    }
-    // Ação para validar o CNPJ
-    public function AdmCnpjDo(Request $request)
-    {
-        $local = base_path('public/inc/file/function.php');
-
-        if (file_exists($local)) {
-            include $local;
-
-            if (validateCNPJ($request->cnpj) === false) {
-                return response()->json([
-                    'status' => "alert",
-                    'message' => "Ops! CNPJ inválido."
-                ]);
-
-                exit();
-            }else{
-                return response()->json([
-                    'status' => "success",
-                    'message' => "CNPJ válido."
-                ]);
-
-                exit();
-            }
-        }else{
-            return response()->json([
-                'status' => "error",
-                'message' => "Erro ao validar o CNPJ."
-            ]);
-
-            exit();
-        }        
-    }
-    // Ação para captura de dados de endereço por CEP via API externa
-    public function AdmCepDo(Request $request)
-    {
-        $data = Http::get(url:"https://viacep.com.br/ws/{$request->cep}/json/")->json();
-
-        if ($data) {   
-            if (!empty($data['erro'])) {
-                return response()->json([
-                    'status' => "alert",
-                    'message' => "Ops! Endereço não encontrado."
-                ]);
-            }else{
-                return $data;
-            }
-        }
-
-        return false;
     }
     // Ação para salvar os dados no BD
     public function AdmCompanyDo(Request $request)

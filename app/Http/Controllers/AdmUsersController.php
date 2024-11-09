@@ -50,53 +50,6 @@ class AdmUsersController extends Controller
             'user' => $user
         ]);
     }
-    // Ação para verificar a força da senha digitada
-    public function AdmPasswordDo(Request $request)
-    {
-        $local = base_path('public/inc/file/function.php');
-
-        include $local;
-
-        $checker = forcePassword($request->password);
-
-        if ($checker == 4) {
-            return response()->json([
-                'status' => 'success',
-                'width' => "100",
-                'bgcolor' => "bg-success",
-                'txt' => "senha forte"
-            ]);
-
-            exit();
-        } else if($checker == 3) {
-            return response()->json([
-                'status' => 'success',
-                'width' => "75",
-                'bgcolor' => "bg-warning",
-                'txt' => "senha moderada"
-            ]);
-
-            exit();
-        } else if($checker == 2) {
-            return response()->json([
-                'status' => 'success',
-                'width' => "50",
-                'bgcolor' => "bg-warning",
-                'txt' => "senha moderada"
-            ]);
-
-            exit();
-        } else {
-            return response()->json([
-                'status' => 'success',
-                'width' => "25",
-                'bgcolor' => "bg-danger",
-                'txt' => "senha fraca"
-            ]);
-
-            exit();
-        }
-    }
     // Ação para salvar os dados no BD
     public function AdmUserDo(Request $request)
     {

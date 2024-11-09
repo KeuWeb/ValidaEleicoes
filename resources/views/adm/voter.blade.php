@@ -83,7 +83,7 @@
                     <div class="row">
                         
                         <div class="col-4">
-                            <select id="local" name="local" data-route-url="{{ route('adm.categories.list.do') }}" class="form-select form-select-lg" @if(!empty($configs->form_local) && $configs->form_local == 2) required @endif>
+                            <select id="local_voter" name="local_voter" data-route-url="{{ route('adm.categories.list.do') }}" class="form-select form-select-lg" @if(!empty($configs->form_local) && $configs->form_local == 2) required @endif>
                                 <option value="" selected>Localidade @if(!empty($configs->form_local) && $configs->form_local == 2) * @endif</option>
                                 @if(isset($locations))
                                     @foreach($locations as $location)
@@ -93,9 +93,10 @@
                             </select>
                         </div>  
 
+                        @if(!empty($configs->form_category) && $configs->form_category == 1)
                         <div class="col-4">
-                            <select id="category" name="category" class="form-select form-select-lg" @if(!empty($configs->form_category) && $configs->form_category == 1) required @endif disabled>
-                                <option value="0" selected>Categoria @if(!empty($configs->form_category) && $configs->form_category == 1) * @endif</option>
+                            <select id="category" name="category" class="form-select form-select-lg" required disabled>
+                                <option value="0" selected>Categoria*</option>
                                 @if(isset($categories))
                                     @foreach($categories as $category)
                                         <option class="opt-{{ $category->id }}" value="{{ $category->id }}">{{ $category->title }}</option>
@@ -103,10 +104,12 @@
                                 @endif
                             </select>
                         </div>                 
- 
+                        @endif
+
                     </div>
 
                     <div class="mt-3 gap-2">
+                        <input type="hidden" id="form_category" name="form_category" value="{{ $configs->form_category }}">
                         <input type="hidden" id="id" name="id" value="{{ @$user->id }}">
                         <input type="hidden" id="route" name="route" value="{{ route('adm.voter.do') }}">
                         <input id="salvar" name="salvar" type="submit" value="SALVAR" class="btn btn-success btn-lg">

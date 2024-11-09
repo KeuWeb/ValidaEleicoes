@@ -41,7 +41,7 @@
                 <ul id="container-list" name="container-list" class="list-group">
                     <li class="list-group-item list-group-item-success">
                         <div class="col-7 fw-bolder text-success">Listagem</div>
-                        <div class="col-2 fw-bolder text-success">Documento</div>
+                        <div class="col-2 fw-bolder text-success">Status</div>
                     </li>
     
                     @if(@$voters->isEmpty() && @$search['src'] != '')    
@@ -67,7 +67,7 @@
                             @foreach($voters as $voter)
     
                             <li id="line-<?=$voter->id;?>" class="list-group-item">
-                                <div class="col-7 fw-bolder pt-1">{{ @$voter->name }}</div>
+                                <div class="col-7 fw-bolder pt-1">{{ @$voter->fullname }}</div>
                                 <div class="col-2 fw-bolder pt-1">@if($voter->status == 1) Ativo @else Desativo @endif </div>
                                 <div class="container-actions col-3 fw-bolder text-end">
                                     <a type="button" href="{{ route('adm.edit.user',@$voter->id) }}" target="_self" class="edit-user btn btn-primary btn-sm text-white"><i class="bi bi-pencil-fill pt-1 me-1 text-white"></i>Editar</a>

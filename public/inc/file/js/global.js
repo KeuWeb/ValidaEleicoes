@@ -3114,9 +3114,10 @@ $(document).on('click', '#btn-search', function () {
 // Seleção de categorias (modulo Localidades)
 $(document).on('change', '.category', function () {
   var location = $('option:selected', this).text();
-  var id_location = $(this).val();
+  var id_location = $('option:selected', this).val();
   if (id_location != "") {
     var html_location = "<li class=location-" + id_location + "><span data-id=\"" + id_location + "\" class=\"dlt-cat\"><i class=\"bi bi-trash-fill pt-1 text-white\"></i></span><p>" + location + "</p></li>";
+    console.log(html_location);
     if (id_location == 0) {
       $('.list-locations').html(html_location);
       $('#categories').val(id_location);
@@ -3126,9 +3127,6 @@ $(document).on('change', '.category', function () {
         $('.list-locations').html('');
         $('#categories').val('');
       }
-      $('.txt-locations').css({
-        'display': 'none'
-      });
       $('.opt-' + id_location).attr('disabled', 'disabled');
       $('.list-locations').append(html_location);
       if ($('.list-locations li').length == 1) {
@@ -3139,6 +3137,9 @@ $(document).on('change', '.category', function () {
         $('#categories').val('');
       }
     }
+    $('.txt-locations').css({
+      'display': 'none'
+    });
   }
 });
 // Exclusão de categorias selecionadas
@@ -5913,10 +5914,9 @@ $(document).ready(function () {
         dataType: 'json',
         success: function success(response) {
           if (response.status != 'success') {
-            msgPopup(response.status, response.message);
-            $('#cnpj').removeClass('text-success');
+            $('#cnpj').addClass('text-danger').removeClass('text-success');
           } else {
-            $('#cnpj').addClass('text-success');
+            $('#cnpj').addClass('text-success').removeClass('text-danger');
           }
           return false;
         },
@@ -5931,9 +5931,109 @@ $(document).ready(function () {
         }
       });
     } else {
-      $(this).removeClass('text-success');
+      $(this).removeClass('text-success').removeClass('text-danger');
     }
   });
+  // Validador de RG
+  $(document).on('keyup', '#rg', function () {
+    rg = $(this).val();
+    if (rg.length >= 9) {
+      $.ajax({
+        url: "/api/validate/rg/do/",
+        type: "get",
+        data: {
+          rg: rg
+        },
+        dataType: 'json',
+        success: function success(response) {
+          if (response.status != 'success') {
+            $('#rg').addClass('text-danger').removeClass('text-success');
+          } else {
+            $('#rg').addClass('text-success').removeClass('text-danger');
+          }
+          return false;
+        },
+        error: function error(response) {
+          msgPopup(response.status, response.message);
+          return false;
+        },
+        statusCode: {
+          500: function _() {
+            msgPopup('error', 'Ops! Erro ao verificar o RG.');
+          }
+        }
+      });
+    } else {
+      $(this).removeClass('text-success').removeClass('text-danger');
+    }
+  });
+  // Validador de CPF
+  $(document).on('keyup', '#cpf', function () {
+    cpf = $(this).val();
+    if (cpf.length >= 13) {
+      $.ajax({
+        url: "/api/validate/cpf/do/",
+        type: "get",
+        data: {
+          cpf: cpf
+        },
+        dataType: 'json',
+        success: function success(response) {
+          if (response.status != 'success') {
+            $('#cpf').addClass('text-danger').removeClass('text-success');
+          } else {
+            $('#cpf').addClass('text-success').removeClass('text-danger');
+          }
+          return false;
+        },
+        error: function error(response) {
+          msgPopup(response.status, response.message);
+          return false;
+        },
+        statusCode: {
+          500: function _() {
+            msgPopup('error', 'Ops! Erro ao verificar o CPF.');
+          }
+        }
+      });
+    } else {
+      $(this).removeClass('text-success').removeClass('text-danger');
+    }
+  });
+  // Validador de E-mail
+  $(document).on('keyup', '#email', function () {
+    email = $(this).val();
+    if (email.length > 10) {
+      $.ajax({
+        url: "/api/validate/email/do/",
+        type: "get",
+        data: {
+          email: email
+        },
+        dataType: 'json',
+        success: function success(response) {
+          if (response.status != 'success') {
+            $('#email').addClass('text-danger').removeClass('text-success');
+          } else {
+            $('#email').addClass('text-success').removeClass('text-danger');
+          }
+          return false;
+        },
+        error: function error(response) {
+          msgPopup(response.status, response.message);
+          return false;
+        },
+        statusCode: {
+          500: function _() {
+            msgPopup('error', 'Ops! Erro ao verificar o E-mail.');
+          }
+        }
+      });
+    } else {
+      $(this).removeClass('text-success').removeClass('text-danger');
+    }
+  });
+
   // Validador de força da senha
   $(document).on('keyup', '.password', function () {
     senha = $(this).val();

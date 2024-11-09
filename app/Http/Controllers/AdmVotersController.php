@@ -41,14 +41,14 @@ class AdmVotersController extends Controller
         ]);
 
         $query = DB::table('tbvoters')->orderBy(
-                'name', 'ASC'
+                'fullname', 'ASC'
             )->where(
                 'status', 1
             );
 
         if ($search) {
             $query->where(
-                'name','like','%'.$search['src'].'%'
+                'fullname','like','%'.$search['src'].'%'
             );
         }
     
@@ -58,53 +58,6 @@ class AdmVotersController extends Controller
             'search' => $search,
             'voters' => $voters
         ]);
-    }
-    // Ação para verificar a força da senha digitada
-    public function AdmPasswordDo(Request $request)
-    {
-        $local = base_path('public/inc/file/function.php');
-
-        include $local;
-
-        $checker = forcePassword($request->password);
-
-        if ($checker == 4) {
-            return response()->json([
-                'status' => 'success',
-                'width' => "100",
-                'bgcolor' => "bg-success",
-                'txt' => "senha forte"
-            ]);
-
-            exit();
-        } else if($checker == 3) {
-            return response()->json([
-                'status' => 'success',
-                'width' => "75",
-                'bgcolor' => "bg-warning",
-                'txt' => "senha moderada"
-            ]);
-
-            exit();
-        } else if($checker == 2) {
-            return response()->json([
-                'status' => 'success',
-                'width' => "50",
-                'bgcolor' => "bg-warning",
-                'txt' => "senha moderada"
-            ]);
-
-            exit();
-        } else {
-            return response()->json([
-                'status' => 'success',
-                'width' => "25",
-                'bgcolor' => "bg-danger",
-                'txt' => "senha fraca"
-            ]);
-
-            exit();
-        }
     }
     // Ação para litagem das categorias conforme local selecionado
     public function AdmCategoriesListDo(Request $request) {
@@ -126,8 +79,6 @@ class AdmVotersController extends Controller
             'tbcat_locations.category', 'tbcategories.title'
         )->get());
 
-        // dd(get_class($categories));
-
         if ($categories->isNotEmpty()) {
             $html = "";
 
@@ -148,33 +99,19 @@ class AdmVotersController extends Controller
     // Ação para salvar os dados no BD
     public function AdmVoterDo(Request $request)
     {
-        if (!filter_var($request->email, FILTER_VALIDATE_EMAIL)) {
-            return response()->json([
-                'status' => "alert",
-                'message' => "Ops! E-mail digitado inválido."
-            ]);
-    
-            exit();
-        }
-        
-        if (!empty($request->rg)) {
-            if (!preg_match('/(^\d{1,2}).?(\d{3}).?(\d{3})-?(\d{1}|X|x$)/', $request->rg)) {
+        if (!empty($request->form_category) && $request->form_category == 1) {
+            if (empty($request->category)) {
                 return response()->json([
                     'status' => "alert",
-                    'message' => "Ops! RG digitado inválido."
+                    'message' => "Ops! Campo categoria deve ser preenchido."
                 ]);
-
+    
                 exit();               
+            } else {
+                $category = $request->category;
             }
-        }
-
-        if (!preg_match('/(^\d{3}\.\d{3}\.\d{3}\-\d{2}$)/', $request->cpf)) {
-            return response()->json([
-                'status' => "alert",
-                'message' => "Ops! CPF digitado inválido."
-            ]);
-
-            exit();               
+        } else {
+            $category = null;
         }
 
         $voter = new AdmVoters();
@@ -185,12 +122,12 @@ class AdmVotersController extends Controller
                     'id',$request->id
                 )->update([
                     'fullname' => $request->fullname,
-                    'rg' => $request->email,
-                    'cpf' => $request->phone,
-                    'other_doc' => $request->login,
-                    'email' => $request->level,
-                    'category' => $request->category,
-                    'local' => $request->local,
+                    'rg' => $request->rg,
+                    'cpf' => $request->cpf,
+                    'other_doc' => $request->other_doc,
+                    'email' => $request->email,
+                    'category' => $category,
+                    'local' => $request->local_voter,
                     'password' => Hash::make($request->password)
                 ]);
             } else {
@@ -198,12 +135,12 @@ class AdmVotersController extends Controller
                     'id',$request->id
                 )->update([
                     'fullname' => $request->fullname,
-                    'rg' => $request->email,
-                    'cpf' => $request->phone,
-                    'other_doc' => $request->login,
-                    'email' => $request->level,
-                    'category' => $request->category,
-                    'local' => $request->local
+                    'rg' => $request->rg,
+                    'cpf' => $request->cpf,
+                    'other_doc' => $request->other_doc,
+                    'email' => $request->email,
+                    'category' => $category,
+                    'local' => $request->local_voter
                 ]);
             }    
             
@@ -219,12 +156,12 @@ class AdmVotersController extends Controller
             } else {
                 $voter->insert([
                     'fullname' => $request->fullname,
-                    'rg' => $request->email,
-                    'cpf' => $request->phone,
-                    'other_doc' => $request->login,
-                    'email' => $request->level,
+                    'rg' => $request->rg,
+                    'cpf' => $request->cpf,
+                    'other_doc' => $request->other_doc,
+                    'email' => $request->email,
                     'category' => $request->category,
-                    'local' => $request->local,
+                    'local' => $request->local_voter,
                     'password' => Hash::make($request->password),
                     'created_at' => date('Y-m-d H:i:s')            
                 ]);

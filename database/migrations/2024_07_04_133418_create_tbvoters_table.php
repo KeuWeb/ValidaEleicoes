@@ -21,8 +21,8 @@ return new class extends Migration
             $table->char('cpf',15)->nullable();
             $table->char('other_doc',50)->nullable();
             $table->string('email',300)->nullable();
-            $table->biginteger('category')->nullable();
             $table->bigInteger('local')->nullable();
+            $table->biginteger('category')->nullable();
             $table->string('password',300);
             $table->timestamps();
             $table->integer('status')->default(1);

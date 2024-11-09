@@ -18,7 +18,8 @@ $('body').on('submit', '#location-adm', function(event) {
                 
                 if ($('#id').val() == "") {
                     $('input[type=text]').val('');
-                    $('.container-locations').html('<li class="txt-locations">Não há categoria(s) selecionada(s) para a localidade.</li>');
+                    $('#categories').val('');
+                    $('.container-locations').html('<li class="txt-locations">Não há categoria(s) selecionada(s) para a localidade.</li><li class="box-locations"><ul class="list-locations"></ul></li>');
                     $('select option').removeAttr('disabled');
                     $('select').prop('selectedIndex', 0);
                 }

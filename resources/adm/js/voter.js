@@ -1,14 +1,14 @@
 // Abilitar campo categoria para listagem respectiva
-$(document).on('change', '#local', function() {
+$(document).on('change', '#local_voter', function() {
 
-    if ($('#local option:selected').val() != '') {
+    if ($('#local_voter option:selected').val() != '') {
         var route = $(this).attr('data-route-url');
 
         $.ajax({
             url: route,
             type: "put",
             data: {
-                location: $('#local option:selected').val()
+                location: $('#local_voter option:selected').val()
             },
             dataType: 'json',
             success: function(response) {
@@ -50,6 +50,8 @@ $('body').on('submit', '#voter-adm', function(event) {
             
             msgPopup(response.status, response.message);
 
+            $('#salvar').val('SALVAR').removeAttr('disabled');
+
             if (response.status == "success") {
                 if($('#id').val() == ""){
                     $('input[type=text],input[type=email],input[type=password]').val('');
@@ -58,12 +60,10 @@ $('body').on('submit', '#voter-adm', function(event) {
                         'width':"0%",
                         'background-color':"#E9ECEF"
                     });
+                    $('#local_voter').prop('selectedIndex', 0);
+                    $('#category').html('<option value="" selected="selected">Categoria*</option>').attr('disabled', 'disabled');
                 }
-
-                $('#id').val($idVoter);
             }
-
-            $('#salvar').val('SALVAR').removeAttr('disabled');
 
             return false;
         },
