@@ -14,6 +14,7 @@ class AdmUploads extends Model
 
     protected $fillable =[
         'upload-logo',
-        'upload-doc'
+        'upload-doc',
+        'upload-list'
     ];
 }

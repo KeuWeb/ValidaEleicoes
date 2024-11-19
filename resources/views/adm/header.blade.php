@@ -61,7 +61,7 @@
                 <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
                   <li><a class="dropdown-item" href="{{ route('adm.voter') }}">Cadastrar Eleitor</a></li>
                   <li><a class="dropdown-item" href="{{ route('adm.voters') }}">Editar/Excluir Eleitor</a></li>
-                  <li><a class="dropdown-item" href="#">Importar Eleitor</a></li>
+                  <li><a class="dropdown-item" href="{{ route('adm.import.voters') }}">Importar Eleitores</a></li>
                 </ul>
               </li>   
               <li class="nav-item dropdown">

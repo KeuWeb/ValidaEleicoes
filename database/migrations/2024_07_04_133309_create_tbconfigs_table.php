@@ -33,6 +33,7 @@ return new class extends Migration
             $table->text('com_message')->nullable();
             $table->string('link_logo')->nullable();
             $table->string('link_doc')->nullable();
+            $table->string('link_list')->nullable();
             $table->timestamps();
         });
 
@@ -52,7 +53,8 @@ return new class extends Migration
             'com_end' => 'Voto computado com sucesso. Agradecemos pela participação em nossa Eleição.',
             'com_message' => 'Olá Eleitor, agradecemos por sua participação na Eleição. Seu voto foi computado com sucesso, abaixo segue maiores informações:',
             'link_logo' => null,
-            'link_doc' => null
+            'link_doc' => null,
+            'link_list' => null
 
 
         ]);

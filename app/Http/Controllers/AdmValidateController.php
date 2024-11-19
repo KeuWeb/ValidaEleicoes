@@ -3,10 +3,22 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Http;
+use Illuminate\Support\Facades\Hash;
 
 class AdmValidateController extends Controller
 {
+    public function generatePassword($size) {
+        $chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuwxyz0123456789*#@";
+        $randomString = '';
+
+        for($i=0;$i<$size;$i=$i+1){
+          $randomString .= $chars[mt_rand(0,60)];
+        }
+
+        return $randomString;
+    }
     // Validação de conta de e-mail
     public function AdmEmailDo(Request $request)
     {
@@ -30,6 +42,8 @@ class AdmValidateController extends Controller
     // Ação para verificar a força da senha digitada
     public function AdmPasswordDo(Request $request)
     {
+        $senha = $request->password;
+        
         $arr_min = array("a","b","c","d","e","f","g","h","i","j","k","l","m","n","o","p","q","r","s","t","u","w","x","y","z");
         $arr_mai = array("A","B","C","D","E","F","G","H","I","J","K","L","M","N","O","P","Q","R","S","T","U","W","X","Y","Z");
         $arr_num = array("1","2","3","4","5","6","7","8","9","0");
@@ -87,7 +101,7 @@ class AdmValidateController extends Controller
         
         $checker = array_count_values(array($retorno_min,$retorno_mai,$retorno_num,$retorno_cae));
         
-        return $checker["S"];
+        $checker = $checker["S"];
 
         if ($checker == 4) {
             return response()->json([
@@ -116,10 +130,19 @@ class AdmValidateController extends Controller
             ]);
 
             exit();
-        } else {
+        } else if($checker == 1) {
             return response()->json([
                 'status' => 'success',
                 'width' => "25",
+                'bgcolor' => "bg-danger",
+                'txt' => "senha fraca"
+            ]);
+
+            exit();
+        } else {
+            return response()->json([
+                'status' => 'success',
+                'width' => "0",
                 'bgcolor' => "bg-danger",
                 'txt' => "senha fraca"
             ]);
@@ -240,5 +263,114 @@ class AdmValidateController extends Controller
             'status' => "success",
             'message' => "CPF digitado é válido."
         ]); 
+    }
+    // Ação para validar cadastro já feito (duplicidades)
+    public function AdmCheckCadDo($type, $col, $data)
+    {
+        $exists = false;
+
+        if ($type == 'user') {
+            $exists = DB::table('tbusers')->where(
+                $col, $data
+            )->where(
+                'status', 1
+            )->exists();
+
+            if ($exists) {
+                return response()->json([
+                    'status' => "alert",
+                    'message' => "Cadastro com o NOME já existente."
+                ]);
+            }
+
+            return null;
+        } elseif ($type == 'voter') {
+            $exists = DB::table('tbvoters')->where(
+                $col, $data
+            )->where(
+                'status', 1
+            )->exists();
+
+            if ($exists) {
+                if ($col == 'fullname') {
+                    $column = "NOME";
+                } else {
+                    $column = strtoupper($col);
+                }
+
+                return response()->json([
+                    'status' => "alert",
+                    'message' => "Cadastro com o " . $column . " já existente."
+                ]);
+            }
+        } 
+
+        return null;
+    }
+    // Ação para validar e salvar os dados do arquivo csv (listagem de eleitores)
+    public function AdmCsvDo($file)
+    {
+        $handle = fopen($file->getRealPath(), 'r');
+        $row = 1;
+        
+        fgetcsv($handle, 1000, ',');
+
+        while (($data = fgetcsv($handle, 1000, ',')) !== false) {   
+            list($name, $rg, $cpf, $email, $other_doc) = $data;
+
+            if (empty($name) || empty($rg) || empty($cpf) || empty($email)) {
+
+                return "Erro na linha $row: todos os campos (Nome, RG, CPF e Email) são obrigatórios.";
+            }
+
+            $request = new Request($data);
+
+            $request->merge([
+                'fullname' => $name,
+                'rg' => $rg,
+                'cpf' => $cpf,
+                'email' => $email,
+                'other_doc' => $other_doc,
+            ]);
+
+            $reponseRg = $this->AdmRgDo($request);
+            $reponseCpf = $this->AdmCpfDo($request);
+            $reponseEmail = $this->AdmEmailDo($request);
+
+            $responseDtRg = $reponseRg->getData();
+            $responseDtCpf = $reponseCpf->getData();
+            $responseDtEmail = $reponseEmail->getData();
+    
+            if ($responseDtRg->status == "alert") {
+                return "Erro na linha $row: $responseDtRg->message";
+            }
+    
+            if ($responseDtCpf->status == "alert") {
+                return "Erro na linha $row: $responseDtCpf->message";
+            }
+    
+            if ($responseDtEmail->status == "alert") {
+                return "Erro na linha $row: $responseDtEmail->message";
+            }
+
+            $password = $this->generatePassword(8);
+    
+            DB::table('tbvoters')->updateOrInsert(
+            [
+                'cpf' => $cpf
+            ],[
+                'fullname' => $name,
+                'rg' => $rg,
+                'cpf' => $cpf,
+                'other_doc' => $other_doc,
+                'email' => $email,
+                'password' => Hash::make($password)
+            ]);
+    
+            $row++;
+        }
+        fclose($handle);
+    
+        return null;
     }
 }

@@ -23,6 +23,7 @@ return new class extends Migration
             $table->string('email',300)->nullable();
             $table->bigInteger('local')->nullable();
             $table->biginteger('category')->nullable();
+            $table->char('other_login',50)->nullable();
             $table->string('password',300);
             $table->timestamps();
             $table->integer('status')->default(1);

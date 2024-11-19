@@ -40,7 +40,7 @@
                             <label class="form-check-label" for="access2">
                                 <b class="fw-bold text-dark">Por E-mail</b>
                             </label>
-                            <p class="fs-6">Essa opção formaliza o acesso do elitor a cabine de votação por e-mail.</p>
+                            <p class="fs-6">Essa opção formaliza o acesso do eleitor a cabine de votação por e-mail.</p>
                         </div>
                     </div>
 
@@ -50,7 +50,7 @@
                             <label class="form-check-label" for="access3">
                                 <b class="fw-bold text-dark">Personalizado</b>
                             </label>
-                            <p class="fs-6">Essa opção formaliza o acesso do elitor a cabine de votação por login personalizado.</p>
+                            <p class="fs-6">Essa opção formaliza o acesso do eleitor a cabine de votação por login personalizado (Matricula).</p>
                         </div>
                     </div>
 

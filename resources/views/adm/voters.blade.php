@@ -14,10 +14,10 @@
                 <form id="form-delete" name="form-delete" class="btns-delete d-none">
                     @csrf
                     @method('PUT')
-                    <input type="hidden" id="route-delete" name="route-delete" value="{{ route('adm.del.user.do') }}">
+                    <input type="hidden" id="route-delete" name="route-delete" value="{{ route('adm.del.voter.do') }}">
                     <input type="hidden" id="idDelete" name="idDelete">
-                    <button type="button" class="n-user btn btn-success btn-sm">Cancelar</button>
-                    <button type="submit" class="y-user btn btn-danger btn-sm">Excluir</button>
+                    <button type="button" class="n-voter btn btn-success btn-sm">Cancelar</button>
+                    <button type="submit" class="y-voter btn btn-danger btn-sm">Excluir</button>
                 </form>
                 <div class="time-bar bar" data-style="smooth"></div>
             </div>
@@ -30,7 +30,7 @@
                 <form id="form-search" name="form-search" autocomplete="off" method="GET" style="padding-left: 0;">
                     
                     <div class="input-group mb-3">
-                        <input type="text" id="src" name="src" class="form-control" data-module="user" placeholder="Digite o nome do eleitor a ser buscado">
+                        <input type="text" id="src" name="src" class="form-control" data-module="voter" placeholder="Digite o nome do eleitor a ser buscado">
                         <div class="input-group-append">
                         <button id="btn-search" name="btn-search" class="btn btn-success text-white" type="button"><i class="text-white bi bi-search"> buscar</i></button>
                         </div>
@@ -70,7 +70,7 @@
                                 <div class="col-7 fw-bolder pt-1">{{ @$voter->fullname }}</div>
                                 <div class="col-2 fw-bolder pt-1">@if($voter->status == 1) Ativo @else Desativo @endif </div>
                                 <div class="container-actions col-3 fw-bolder text-end">
-                                    <a type="button" href="{{ route('adm.edit.user',@$voter->id) }}" target="_self" class="edit-user btn btn-primary btn-sm text-white"><i class="bi bi-pencil-fill pt-1 me-1 text-white"></i>Editar</a>
+                                    <a type="button" href="{{ route('adm.edit.voter',@$voter->id) }}" target="_self" class="edit-voter btn btn-primary btn-sm text-white"><i class="bi bi-pencil-fill pt-1 me-1 text-white"></i>Editar</a>
                                     <button type="submit" data-id={{ @$voter->id }} data-module="voter" class="delete btn btn-danger btn-sm"><i class="bi bi-trash-fill pt-1 me-1 text-white"></i>Excluir</button>
                                 </div>
                             </li>

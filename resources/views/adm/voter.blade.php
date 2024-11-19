@@ -27,14 +27,14 @@
                     <div class="row">
                         <div class="col-6">
                             <div class="form-floating mb-3">
-                                <input type="text" class="form-control" id="fullname" name="fullname" placeholder="Nome completo" value="{{ @$user->name }}" required>
+                                <input type="text" class="form-control" id="fullname" name="fullname" placeholder="Nome completo" value="{{ @$voter->fullname }}" required>
                                 <label for="fullname">Nome completo*</label>
                             </div>
                         </div>
 
                         <div class="col-6">
                             <div class="form-floating mb-3">
-                                <input type="text" class="form-control" id="email" name="email" placeholder="E-mail válido" value="{{ @$user->name }}" required>
+                                <input type="text" class="form-control" id="email" name="email" placeholder="E-mail válido" value="{{ @$voter->email }}" required>
                                 <label for="email">E-mail*</label>
                             </div>
                         </div>
@@ -43,51 +43,59 @@
 
                     <div class="row">
 
+                    <div class="col-3">
+                            <div class="form-floating mb-3">
+                                <input type="text" class="form-control" id="other_login" name="other_login" placeholder="Matrícula" value="{{ @$voter->other_login }}" required>
+                                <label for="other_doc">Matrícula (caso houver)</label>
+                            </div>
+                        </div>
+
                         <div class="col-3">
                             <div class="form-floating mb-3">
-                                <input type="text" class="form-control mask" data-ref="rg" id="rg" name="rg" placeholder="00.000.000-0" value="{{ @$user->phone }}" required>
+                                <input type="text" class="form-control mask" data-ref="rg" id="rg" name="rg" placeholder="00.000.000-0" value="{{ @$voter->rg }}" required>
                                 <label for="rg">RG <small class="fst-italic">(somente números)</small></label>
                             </div>
                         </div>
 
                         <div class="col-3">
                             <div class="form-floating mb-3">
-                                <input type="text" class="form-control mask" data-ref="cpf" id="cpf" name="cpf" placeholder="000.000.000-00" value="{{ @$user->phone }}" required>
+                                <input type="text" class="form-control mask" data-ref="cpf" id="cpf" name="cpf" placeholder="000.000.000-00" value="{{ @$voter->cpf }}" required>
                                 <label for="cpf">CPF <small class="fst-italic">(somente números)</small></label>
                             </div>
                         </div>
 
                         <div class="col-3">
                             <div class="form-floating mb-3">
-                                <input type="text" class="form-control" id="other_doc" name="other_doc" placeholder="Outro documento" value="{{ @$user->login }}" required>
+                                <input type="text" class="form-control" id="other_doc" name="other_doc" placeholder="Outro documento" value="{{ @$voter->other_doc }}" required>
                                 <label for="other_doc">Outro documento (passaporte, etc)</label>
                             </div>
                         </div>
 
-                        <div class="col-3">
-                            <div class="form-floating mb-3">
-                                <input type="password" class="form-control password" id="password" name="password" placeholder="senha valida" value="" <?php if(empty(@$user->id)){ ?>required <?php } ?>>
-                                <label for="password">Senha<?php if(empty(@$user->id)){ ?>*<?php } ?></label>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="row position-relative">
-                        <div class="col-3 position-absolute end-0" style="top: -22px;">
-                            <div id="container-doc-progress-bar" class="progress" role="progressbar" aria-label="Success example" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="height: 5px;">
-                                <div id="doc-progress-bar" class="progress-bar bg-success" style="transition: 0.5s;height: 5px;width: 0%"></div>
-                            </div>
-                        </div>
                     </div>
 
                     <div class="row">
+
+                        <div class="col-4">
+                            <div class="form-floating mb-3">
+                                <input type="password" class="form-control password" id="password" name="password" placeholder="senha valida" value="" <?php if(empty(@$voter->id)){ ?>required <?php } ?>>
+                                <label for="password">Senha<?php if(empty(@$voter->id)){ ?>*<?php } ?></label>
+                            </div>
+                            <div class="row position-relative">
+                                <div class="col-12 position-absolute" style="top: -22px;">
+                                    <div id="container-doc-progress-bar" class="progress" role="progressbar" aria-label="Success example" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="height: 5px;">
+                                        <div id="doc-progress-bar" class="progress-bar bg-success" style="transition: 0.5s;height: 5px;width: 0%"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
                         
                         <div class="col-4">
-                            <select id="local_voter" name="local_voter" data-route-url="{{ route('adm.categories.list.do') }}" class="form-select form-select-lg" @if(!empty($configs->form_local) && $configs->form_local == 2) required @endif>
-                                <option value="" selected>Localidade @if(!empty($configs->form_local) && $configs->form_local == 2) * @endif</option>
+                            <select id="local_voter" name="local_voter" data-route-url="{{ route('adm.categories.list.do') }}" class="form-select form-select-lg" required>
+                                <option value="" selected>Localidade*</option>
                                 @if(isset($locations))
                                     @foreach($locations as $location)
-                                        <option class="opt-{{ $location->id }}" value="{{ $location->id }}">{{ $location->local }}</option>
+                                        <option class="opt-{{ $location->id }}" value="{{ $location->id }}" @if(isset($voter) && ($voter->local == $location->id)) selected @endif>{{ $location->local }}</option>
                                     @endforeach
                                 @endif
                             </select>
@@ -95,11 +103,11 @@
 
                         @if(!empty($configs->form_category) && $configs->form_category == 1)
                         <div class="col-4">
-                            <select id="category" name="category" class="form-select form-select-lg" required disabled>
+                            <select id="category" name="category" class="form-select form-select-lg" required @if(!isset($voter)) disabled @endif>
                                 <option value="0" selected>Categoria*</option>
                                 @if(isset($categories))
                                     @foreach($categories as $category)
-                                        <option class="opt-{{ $category->id }}" value="{{ $category->id }}">{{ $category->title }}</option>
+                                        <option class="opt-{{ $category->id }}" value="{{ $category->id }}" @if(isset($voter) && ($voter->category == $category->id)) selected @endif>{{ $category->title }}</option>
                                     @endforeach
                                 @endif
                             </select>
@@ -110,7 +118,7 @@
 
                     <div class="mt-3 gap-2">
                         <input type="hidden" id="form_category" name="form_category" value="{{ $configs->form_category }}">
-                        <input type="hidden" id="id" name="id" value="{{ @$user->id }}">
+                        <input type="hidden" id="id" name="id" value="{{ @$voter->id }}">
                         <input type="hidden" id="route" name="route" value="{{ route('adm.voter.do') }}">
                         <input id="salvar" name="salvar" type="submit" value="SALVAR" class="btn btn-success btn-lg">
                     </div>

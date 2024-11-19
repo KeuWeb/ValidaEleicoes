@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Controllers\AdmValidateController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\DB;
@@ -10,6 +11,12 @@ use App\Models\AdmVoters;
 
 class AdmVotersController extends Controller
 {
+    protected $admValidateController;
+
+    public function __construct(AdmValidateController $admValidateController)
+    {
+        $this->admValidateController = $admValidateController;
+    }
     // Ação para acessar a pagina do formulário para cadastro
     public function AdmVoter()
     {
@@ -31,7 +38,39 @@ class AdmVotersController extends Controller
             'categories' => $categories,
             'locations' => $locations,
             'configs' => $configs
-        ]);;
+        ]);
+    }
+    // Ação para acessar a pagina de importação de cadastros
+    public function AdmImportVoters() {
+        $import = DB::table('tbconfigs')->first();
+
+        return view('adm/import', [
+            'link_list' => $import->link_list
+        ]);
+    }
+    // Ação para direcionar para a pagina da edição do cadastro selecionado
+    public function AdmEditVoter(AdmVoters $voter)
+    {
+        $categories = DB::table('tbcategories')->orderBy(
+            'title', 'ASC'
+        )->where(
+            'status', 1
+        )->get();
+
+        $locations = DB::table('tblocations')->orderBy(
+            'local', 'ASC'
+        )->where(
+            'status', 1
+        )->get();
+
+        $configs = DB::table('tbconfigs')->first();
+
+        return view('adm/voter', [
+            'categories' => $categories,
+            'locations' => $locations,
+            'configs' => $configs,
+            'voter' => $voter
+        ]);
     }
     // Ação para acessar a pagina do formulário para cadastro
     public function AdmVoters(Request $request)
@@ -99,6 +138,40 @@ class AdmVotersController extends Controller
     // Ação para salvar os dados no BD
     public function AdmVoterDo(Request $request)
     {
+        if(empty($request->id)) {
+            if (!empty($request->rg)) {
+                $checkerRG = $this->admValidateController->AdmCheckCadDo('voter', 'rg', $request->rg);
+                
+                if($checkerRG) {
+                    return $checkerRG;
+                }
+            }
+
+            if (!empty($request->cpf)) {
+                $checkerCPF = $this->admValidateController->AdmCheckCadDo('voter', 'cpf', $request->cpf);
+                
+                if($checkerCPF) {
+                    return $checkerCPF;
+                }
+            }
+
+            if (!empty($request->fullname)) {
+                $checkerName = $this->admValidateController->AdmCheckCadDo('voter', 'fullname', $request->fullname);
+                
+                if($checkerName) {
+                    return $checkerName;
+                }
+            }
+
+            if (!empty($request->email)) {
+                $checkerEmail = $this->admValidateController->AdmCheckCadDo('voter', 'email', $request->email);
+                
+                if($checkerEmail) {
+                    return $checkerEmail;
+                }
+            }
+        }
+
         if (!empty($request->form_category) && $request->form_category == 1) {
             if (empty($request->category)) {
                 return response()->json([
@@ -177,5 +250,25 @@ class AdmVotersController extends Controller
         ]);
 
         exit();
+    }
+    // Ação para excluir o registro no BD
+    public function AdmDelVoterDo(Request $request)
+    {
+        if (!empty($request)) {
+            $voter = new AdmVoters();
+
+            $voter->where(
+                'id',$request->idDelete
+            )->update([
+                'status' => 2
+            ]);
+
+            return response()->json([
+                'status' => "success",
+                'message' => "Registro excluido com sucesso."
+            ]);
+    
+            exit();
+        }
     }
 }

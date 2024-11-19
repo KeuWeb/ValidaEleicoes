@@ -88,4 +88,7 @@ Route::middleware(['web'])->group(function(){
    Route::get('/adm/voter',[AdmVotersController::class,'AdmVoter'])->name('adm.voter');
    Route::get('/adm/voters',[AdmVotersController::class, 'AdmVoters'])->name('adm.voters');
    Route::put('/adm/voter/do',[AdmVotersController::class,'AdmVoterDo'])->name('adm.voter.do');
+   Route::get('/adm/voter/{voter}',[AdmVotersController::class, 'AdmEditVoter'])->name('adm.edit.voter');
+   Route::put('adm/voter/delete/do',[AdmVotersController::class, 'AdmDelVoterDo'])->name('adm.del.voter.do');
+   Route::get('adm/voters/import',[AdmVotersController::class, 'AdmImportVoters'])->name('adm.import.voters');
 });

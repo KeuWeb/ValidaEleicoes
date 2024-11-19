@@ -2,13 +2,21 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Controllers\AdmValidateController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\DB;
 use App\Models\AdmUploads;
+use Illuminate\Support\Facades\Storage;
 
 class AdmUploadsController extends Controller
 {
+    protected $admValidateController;
+
+    public function __construct(AdmValidateController $admValidateController)
+    {
+        $this->AdmValidateController = $admValidateController;
+    }
     // Ação para acessar a pagina com seu respectivo formulário
     public function AdmUploads()
     {
@@ -27,31 +35,51 @@ class AdmUploadsController extends Controller
         if ($request->upload == "logo") {
             $type = 'jpeg,png,gif';
             $txtType = 'O arquivo deve ser um arquivo tipo imagem: jpeg, png ou gif.';
-        } else {
+        } elseif ($request->upload == "doc") {
             $type = "doc,docx,pdf";
             $txtType = 'O arquivo deve ser um arquivo tipo texto: doc, docx ou pdf.';
+        } elseif ($request->upload == "list") {
+            $type = "csv";
+            $txtType = 'O arquivo deve ser um arquivo tipo Excel: csv.';
+        } else {
+            return response()->json([
+                'status' => "error",
+                'message' => "Opção de upload inválida."
+            ]);
+
+            exit();
         }
 
         if ($request->hasFile($fileUpload)) {
 
             try {
 
-                $request->validate([
-                    $fileUpload => [
-                        'required',
-                        'file',
-                        'mimes:'.$type,
-                        'max:2048'
-                    ],
-                ], [
-                    $fileUpload.'.mimes' => $txtType,
-                    $fileUpload.'.max' => 'O arquivo não pode ter mais de 2MB.',
-                ]);
+                // $request->validate([
+                //     $fileUpload => [
+                //         'required',
+                //         'file',
+                //         'mimes:'.$type,
+                //         'max:2048'
+                //     ],
+                // ], [
+                //     $fileUpload.'.mimes' => $txtType,
+                //     $fileUpload.'.max' => 'O arquivo não pode ter mais de 2MB.',
+                // ]);
 
                 $file = $request->file($fileUpload);
 
                 if (is_array($file)) {
                     $file = $file[0];
+                }
+
+                if ($request->upload == "list") {
+                    $csvValidationError = $this->AdmValidateController->AdmCsvDo($file);
+                    if ($csvValidationError) {
+                        return response()->json([
+                            'status' => 'alert',
+                            'message' => $csvValidationError,
+                        ], 200);
+                    }
                 }
 
                 $path = $file->store('upload');

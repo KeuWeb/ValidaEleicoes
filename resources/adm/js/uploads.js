@@ -1,5 +1,6 @@
     // Upload de arquivos
     $(document).on('change', '.files', function(event){
+
         event.preventDefault();
 
         form = $(this).attr('data-form');

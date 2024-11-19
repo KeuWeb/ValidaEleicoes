@@ -72,7 +72,7 @@
                             <label class="form-check-label" for="aval2">
                                 <b class="fw-bold text-dark">Com avaliação de Comitê</b>
                             </label>
-                            <p class="fs-6">Caso a eleição esteja com a opção de indicação ativa, somente com a avaliação/aprovação dos dos indicados pelo comitê a eleição é liberada/continuada.</p>
+                            <p class="fs-6">Caso a eleição esteja com a opção de indicação ativa, somente com a avaliação/aprovação dos indicados pelo comitê a eleição é liberada/continuada.</p>
                         </div>
                     </div>
 
