@@ -1,0 +1,13 @@
+// global.js
+import '/file/js/jquery-ui.js';
+import '/file/js/jquery.form.min.js';
+import '/file/js/jquery.mask.js';
+import '/file/js/mask.js';
+import '/file/js/popup.manager.js';
+import '/file/js/select2.min.js';
+import '/file/js/uploads.js';
+import '/file/js/validate.js';
+import '/file/js/function.js';
+import '/file/js/cep.js';
+import '/file/popperjs/core/dist/umd/popper.js';
+import '/file/bootstrap/dist/js/bootstrap.min.js';

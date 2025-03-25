@@ -1,0 +1,185 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins&display=swap');
+
+* {
+    font-family: 'Poppins';
+    font-weight: 400;
+    font-style: normal;
+    color: #555;
+}
+
+option:disabled{
+    color: #ff0202;
+}
+
+a {
+    font-style: normal !important;
+    text-decoration: none !important;
+    color: inherit !important;
+}
+
+li {
+    list-style: none !important;
+}
+
+label {
+    font-size: 0.9em !important;
+    color: #777 !important;
+}
+
+button:disabled {
+    background-color: #CCCCCC !important;
+    color: #FFFFFF !important;
+    border: #CCCCCC !important;
+}
+
+select {
+    padding: 1.625rem 0 .625rem 1.1rem !important;
+    font-size: .9rem !important;
+}
+
+#container-print {
+    width: 700px;
+}
+
+#container-print h1, #container-print p , #container-print p b, #container-print span, #container-print i {
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 0.85em;
+    color: #000000;
+}
+
+#container-print i {
+    font-size: 0.7em !important;
+    font-style: italic;
+}
+
+#container-print p b {
+    font-size: 1em;
+}
+
+#modal-info {
+    display: none;
+    width: 70%;
+    position: absolute;
+    top: 20px;
+    left: 15%;
+    background-color: #FFFFFF;
+    z-index: 600;
+}
+
+.text-justify {
+    text-align: justify;
+}
+
+.list-candidates {
+    padding: 0 !important;
+    margin: 0 !important;
+}
+
+.list-candidates li {
+    list-style: none !important;
+}
+
+.btn-coutingList, .btn-coutingList:active, .btn-coutingList:hover, .btn-coutingList:visited, .btn-coutingList:focus-visible {
+    height: 100% !important;
+    border: none !important;
+    background-color: #FFFFFF !important;
+}
+
+.select-label {
+    margin-left: 1.2em !important;
+}
+
+.btn-list-active {
+    background-color: #0D6EFD !important;
+}
+
+.btn-list-active h5 b, .btn-list-active p {
+    color: #FFFFFF;
+}
+
+#link-copyright {
+    position: fixed;
+    margin: 0 15px 15px 0;
+    right: 0;
+    bottom: 0;
+    font-size: 0.7em;
+    color: #FFFFFF;
+}
+
+#container-system-adm-login {
+    background: url('/file/img/background-adm.jpg') no-repeat center;
+}
+
+#container-system-booth-login {
+    background: url('/file/img/background-booth.jpg') no-repeat center;
+}
+
+#container-system-adm-login, #container-system-booth-login {
+    background-size: auto 130%;
+}
+
+.list-group-item div,.list-group-item div i {
+    position: relative;
+    float: left;
+}
+
+.btns-delete {
+    text-align: center;
+}
+
+.check-votation {
+    width: 100%;
+    height: 100%;
+    cursor: pointer;
+    background: url('/file/img/icon-static-on.gif') no-repeat right 15px;
+    background-size: 80px;
+}
+
+.check-boxes {
+    position: absolute;
+    /* right: 3000px; */
+}
+
+.container-locations {
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    width: 100%;
+    list-style: none;
+    margin-left: 0.1% !important;
+    padding: 10px 0;
+    font-size: 0.9em;
+}
+
+.list-locations li {
+    list-style: none !important;
+    display: table;
+    border-radius: 5px;
+    position: relative;
+    float: left;
+    margin-right: 5px;
+}
+
+.list-locations span, .list-locations p {
+    position: relative;
+    float: left;
+    padding: 5px 8px;
+}
+
+.list-locations span {
+    background-color: #FF0000;
+    cursor: pointer;
+    border-bottom-left-radius: 5px;
+    border-top-left-radius: 5px;
+}
+
+.list-locations p {
+    margin: 0 !important;
+    background-color: #3A88CC;
+    color: #FFFFFF;
+    border-bottom-right-radius: 5px;
+    border-top-right-radius: 5px;
+}
+
+.list-locations {
+    padding: 0;
+}

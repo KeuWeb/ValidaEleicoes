@@ -1,0 +1,6 @@
+/* global.css */
+@import url('/file/bootstrap/dist/css/bootstrap.min.css');
+@import url('/file/bootstrap-icons/font/bootstrap-icons.css');
+@import url('/file/animate.css/animate.min.css');
+@import url('/file/css/geral.css');
+@import url('/file/css/popup.manager.css');
